@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 public class Login {
+	//Comentario de prueba
 	@Id
 	@Column(name="LoginID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
