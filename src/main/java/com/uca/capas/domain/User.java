@@ -1,16 +1,12 @@
 package com.uca.capas.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -22,31 +18,29 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userID;
 	
-	@OneToOne
-    @JoinColumn(name = "RolID", referencedColumnName = "RolID")
+	@ManyToOne
+    @JoinColumn(name = "RolID")
     private Rol rol;
 	
-	@ManyToMany
-	@JoinTable(
-			  name = "MateriaXUser", 
-			  joinColumns = @JoinColumn(name = "UserID"), 
-			  inverseJoinColumns = @JoinColumn(name = "MateriaID"))
-	List<Materia> materias;
+	@ManyToOne
+    @JoinColumn(name = "CentroEscolarID")
+    private CentroEscolar centroEscolar;
 	
-	@OneToOne(mappedBy = "user")
-    private Login login;
+	@ManyToOne
+	@JoinColumn(name= "MunicipioID")
+	private Municipio municipio;
 	
-	@Column(name="FirstName")
+	@ManyToOne
+	@JoinColumn(name="DepartamentoID")
+	private Departamento departamento;
+	
+	@Column(name="Nombre")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String firstName;
+	private String nombre;
 
-	@Column(name="LastName")
+	@Column(name="Apellido")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String lastName;
-	
-	@Column(name="Carnet")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String carnet;
+	private String apellido;
 	
 	@Column(name="BirthdayDate")
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -56,27 +50,17 @@ public class User {
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String edad;
 	
-	@Column(name="Direccion")
+	@Column(name="Username")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String direccion;
+	private String username;
 	
-	@Column(name="TelefonoFijo")
+	@Column(name="PasswordEncripted")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String telefonoFijo;
+	private String passwordEncripted;
 	
-	@Column(name="TelefonoMovil")
+	@Column(name="Estado")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String telefonoMovil;
+	private String Estado;
 	
-	@Column(name="InstitucionDeProcedencia")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String institucion;
 	
-	@Column(name="NombreDelPadre")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String padre;
-	
-	@Column(name="NombreDeLaMadre")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String madre;
 }

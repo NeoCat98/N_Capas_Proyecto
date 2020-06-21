@@ -10,42 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(schema="public",name="Rol")
-public class Rol {
-	
+@Table(schema="public",name="Departamento")
+public class Departamento {
 	@Id
-	@Column(name="RolID")
+	@Column(name="DepartamentoID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer rolID;
+	private Integer departamentoID;
 	
-	@Column(name="RolName")
+	@Column(name="DepartamentoName")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String rolName;
+	private String departamentoName;
 	
-	@OneToMany(mappedBy = "rol")
+	@OneToMany(mappedBy = "departamento")
     private List<User> user;
 	
-	Rol(){
+	Departamento(){
 		
 	}
 
-	public Integer getRolID() {
-		return rolID;
+	public Integer getDepartamentoID() {
+		return departamentoID;
 	}
 
-	public void setRolID(Integer rolID) {
-		this.rolID = rolID;
+	public void setDepartamentoID(Integer departamentoID) {
+		this.departamentoID = departamentoID;
 	}
 
-	public String getRolName() {
-		return rolName;
+	public String getDepartamentoName() {
+		return departamentoName;
 	}
 
-	public void setRolName(String rolName) {
-		this.rolName = rolName;
+	public void setDepartamentoName(String departamentoName) {
+		this.departamentoName = departamentoName;
 	}
 
 	public List<User> getUser() {
@@ -55,6 +53,5 @@ public class Rol {
 	public void setUser(List<User> user) {
 		this.user = user;
 	}
-	
 	
 }

@@ -10,42 +10,40 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
-@Table(schema="public",name="Rol")
-public class Rol {
-	
+@Table(schema="public",name="Municipio")
+public class Municipio {
 	@Id
-	@Column(name="RolID")
+	@Column(name="MunicipioID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer rolID;
+	private Integer municipioID;
 	
-	@Column(name="RolName")
+	@Column(name="MunicipioName")
 	@NotEmpty(message="Este campo no puede estar vacio")
-	private String rolName;
+	private String municipioName;
 	
-	@OneToMany(mappedBy = "rol")
+	@OneToMany(mappedBy = "municipio")
     private List<User> user;
-	
-	Rol(){
+
+	Municipio(){
 		
 	}
-
-	public Integer getRolID() {
-		return rolID;
+	
+	public Integer getMunicipioID() {
+		return municipioID;
 	}
 
-	public void setRolID(Integer rolID) {
-		this.rolID = rolID;
+	public void setMunicipioID(Integer municipioID) {
+		this.municipioID = municipioID;
 	}
 
-	public String getRolName() {
-		return rolName;
+	public String getMunicipioName() {
+		return municipioName;
 	}
 
-	public void setRolName(String rolName) {
-		this.rolName = rolName;
+	public void setMunicipioName(String municipioName) {
+		this.municipioName = municipioName;
 	}
 
 	public List<User> getUser() {
