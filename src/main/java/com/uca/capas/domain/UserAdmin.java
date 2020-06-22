@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -22,17 +23,29 @@ public class UserAdmin {
     @JoinColumn(name = "RolID")
     private Rol rol;
 	
+	@Transient
+	private Integer rolID;
+	
 	@ManyToOne
     @JoinColumn(name = "CentroEscolarID")
     private CentroEscolar centroEscolar;
+	
+	@Transient
+	private Integer centroEscolarID;
 	
 	@ManyToOne
 	@JoinColumn(name= "MunicipioID")
 	private Municipio municipio;
 	
+	@Transient
+	private Integer municipioID;
+	
 	@ManyToOne
 	@JoinColumn(name="DepartamentoID")
 	private Departamento departamento;
+		
+	@Transient
+	private Integer departamentoID;
 	
 	@Column(name="Nombre")
 	@NotEmpty(message="Este campo no puede estar vacio")
