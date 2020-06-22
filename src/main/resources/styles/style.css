@@ -1,0 +1,66 @@
+:root{
+    --background:#d8eefe;
+    --tarjeta: #fffffe;
+
+    --headline: #094067;
+    --paragraph: #5f6c7b;
+
+    --button: #3da9fc;
+}
+body{
+    background-color: var(--background);
+    font-family: 'Muli', sans-serif;
+    color: var(--headline);
+}
+img{
+    width: 15em;
+    height: 15em;
+}
+
+.navbar{
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+.btn-primary{
+    background-color: var(--button) !important;
+    border: none;
+}
+.navbar a{
+    padding: 0.8rem;
+    font-size: 1.5rem;
+}
+.navbar span{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-right: 2rem;
+}
+.navbar p{
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.mid-section{
+    text-align: center;
+}
+.mid-section h3{
+    font-weight: 900;
+    color: var(--headline);
+    font-size: 3rem;
+}
+.mid-section p{
+    color: var(--paragraph);
+    font-size: 1.5rem;
+}
+
+.tarjeta{
+    margin-top: 2rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: var(--tarjeta);
+}
+.tarjeta #nombre-tarjeta{
+    text-decoration: none;
+    color: var(--headline);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
