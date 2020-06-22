@@ -21,7 +21,7 @@ public class UserAdminDAOImpl implements UserAdminDAO{
 	@Override
 	public List<UserAdmin> findAll() throws DataAccessException {
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.materia");
+		sb.append("select * from public.useradmin");
 		Query query = entityManager.createNativeQuery(sb.toString(), UserAdmin.class);
 		List<UserAdmin> resultset = query.getResultList();
 		return resultset;
