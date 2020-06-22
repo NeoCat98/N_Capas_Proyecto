@@ -23,8 +23,7 @@ public class MateriaXAlumnoServiceImpl implements MateriaXAlumnoService{
 
 	@Override
 	public MateriaXAlumno findOne(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		//return materiaXAlumnoRepo.getOne(materiaXAlumnoKey);
-		return null;
+		return materiaXAlumnoRepo.getOne(materiaXAlumnoKey);
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class MateriaXAlumnoServiceImpl implements MateriaXAlumnoService{
 
 	@Override
 	public void delete(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		//materiaXAlumnoRepo.deleteById(materiaXAlumnoKey);
+		materiaXAlumnoRepo.deleteById(materiaXAlumnoKey);
 	}
 
 }

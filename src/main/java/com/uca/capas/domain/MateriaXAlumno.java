@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(schema="public",name="MateriaXAlumno")
 public class MateriaXAlumno {
 	 @EmbeddedId
-	 MateriaXAlumnoKey id;
+	 MateriaXAlumnoKey id = new MateriaXAlumnoKey();
 	 
 	 @ManyToOne
 	 @MapsId("AlumnoID")
