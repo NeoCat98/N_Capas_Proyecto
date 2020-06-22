@@ -17,7 +17,7 @@ public class Login {
 	
 	@OneToOne
     @JoinColumn(name = "UserID", referencedColumnName = "UserID")
-    private User user;
+    private UserAdmin userAdmin;
 	
 	@Column(name="PasswordEncripted")
 	@NotEmpty(message="Este campo no puede estar vacio")

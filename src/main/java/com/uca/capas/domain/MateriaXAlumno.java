@@ -39,7 +39,7 @@ public class MateriaXAlumno {
 	 
 	 @Column(name="Resultado")
 	 @NotEmpty(message="Este campo no puede estar vacio")
-	 private float resultado;
+	 private String resultado;
 	 
 	 MateriaXAlumno(){
 		 
@@ -93,11 +93,11 @@ public class MateriaXAlumno {
 		this.nota = nota;
 	}
 
-	public float getResultado() {
+	public String getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(float resultado) {
+	public void setResultado(String resultado) {
 		this.resultado = resultado;
 	}
 	 

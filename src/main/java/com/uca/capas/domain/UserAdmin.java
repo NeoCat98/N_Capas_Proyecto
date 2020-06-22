@@ -11,12 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(schema="public",name="User")
-public class User {
+@Table(schema="public",name="UserAdmin")
+public class UserAdmin {
 	@Id
-	@Column(name="UserID")
+	@Column(name="UserAdminID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer userID;
+	private Integer userAdminID;
 	
 	@ManyToOne
     @JoinColumn(name = "RolID")

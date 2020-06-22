@@ -24,7 +24,7 @@ public class Departamento {
 	private String departamentoName;
 	
 	@OneToMany(mappedBy = "departamento")
-    private List<User> user;
+    private List<UserAdmin> user;
 	
 	Departamento(){
 		
@@ -46,11 +46,11 @@ public class Departamento {
 		this.departamentoName = departamentoName;
 	}
 
-	public List<User> getUser() {
+	public List<UserAdmin> getUser() {
 		return user;
 	}
 
-	public void setUser(List<User> user) {
+	public void setUser(List<UserAdmin> user) {
 		this.user = user;
 	}
 	
