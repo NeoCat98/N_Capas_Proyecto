@@ -22,7 +22,7 @@ public class MateriaXAlumnoDAOImpl implements MateriaXAlumnoDAO{
 	@Override
 	public List<MateriaXAlumno> findAll() throws DataAccessException {
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.materia");
+		sb.append("select * from public.materiaxalumno");
 		Query query = entityManager.createNativeQuery(sb.toString(), MateriaXAlumno.class);
 		List<MateriaXAlumno> resultset = query.getResultList();
 		return resultset;
