@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+	<form th:action="@{/formRegistro}" method="post" th:object="${user}">
+		
+		<div  class="form row">
+		
+			<div class="form-group col-md-6">
+			 	<label for="inputNombre">Nombre</label>
+			 	<input type="text" class="form-control" id="inputNombre">
+			</div>
+			
+			<div class="form-group col-md-6">
+      			<label for="inputApellido">Apellido</label>
+     		 	<input type="text" class="form-control" id="inputApellido">
+    		</div>
+    		
+    		<div class="form-group col-md-6">
+      			<label for="inputEdad">Edad</label>
+     		 	<input type="number" class="form-control" id="inputEdad">
+    		</div>
+    		
+    		<div class="form-group col-md-6">
+      			<label for="inputFechas">Fecha de nacimiento</label>
+     		 	<input type="text" class="form-control" id="inputFechas" placeholder="DD/MM/AAAA">
+    		</div>
+    		
+		</div>
+		<div class="form-group">
+			<label for="inputPassword">Password</label>
+    		<input type="password" class="form-control" id="inputPassword">
+		</div>
+		
+		<div class="form row">
+			<div class="form-group col-md-6">
+   				<div class="form-check">
+      				<input class="form-check-input" type="checkbox" id="gridCheck">
+      				<label class="form-check-label" for="gridCheck">
+       		 			Activo
+      				</label>
+    			</div>
+    		</div>
+    		<div class="form-group col-md-6">
+   				<div class="form-check">
+      				<input class="form-check-input" type="checkbox" id="gridCheck2">
+      				<label class="form-check-label" for="gridCheck2">
+       		 			Inactivo
+      				</label>
+    			</div>
+    		</div>
+  		</div>
+  		
+  		<div class="form-group">
+			<label for="inputCentro">CentroEscolar</label>
+			<select id="inputCentro" class="form-control" th:field="*{centroEscolar.centroEscolarID}">
+				<option th:each="cen : ${centros}"
+						th:value=${cen.centroEscolarID}
+						th:text="${cen.CentroEscolarName}"/>
+			</select>
+		</div>
+  		
+  		
+  		
+	</form>
+
+</body>
+</html>

@@ -40,7 +40,7 @@ public class JPAConfiguration {
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/Proyecto");
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("86F1A07C");
+		dataSource.setPassword("root");
 
 		return dataSource;
 	}
@@ -48,6 +48,7 @@ public class JPAConfiguration {
 	Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.enable_lazy_load_no_trans","true");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		return properties;
 	}
