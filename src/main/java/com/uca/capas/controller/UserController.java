@@ -25,6 +25,8 @@ import com.uca.capas.service.MunicipioService;
 import com.uca.capas.service.RolService;
 import com.uca.capas.service.UserAdminService;
 
+import javassist.expr.NewArray;
+
 @Controller
 public class UserController {
 	@Autowired
@@ -60,7 +62,7 @@ public class UserController {
 		System.out.println(pass);
 		if (userBD.getPasswordEncripted().equals(pass)) {
 			mav.addObject("UserAdmin",userBD);
-			if(userBD.getRolID()==1) {
+			if(userBD.getRol().getRolID().equals(1)) {
 				mav.setViewName("dashboard");
 			}else {
 				mav.setViewName("co-opciones");
