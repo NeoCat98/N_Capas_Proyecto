@@ -1,5 +1,9 @@
 package com.uca.capas.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+
+import java.text.ParseException;
 
 @Entity
 @Table(schema="public",name="UserAdmin")
@@ -57,24 +63,27 @@ public class UserAdmin {
 	private String apellido;
 	
 	@Column(name="BirthdayDate")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String birthdayDate;
+	//@NotEmpty(message="Este campo no puede estar vacio")
+	private Date birthdayDate;
 	
 	@Column(name="Edad")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String edad;
+	private int edad;
 	
 	@Column(name="Username")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String username;
+	
+
+	@Column(name="Direccion")
+	@NotEmpty(message="Este campo no puede estar vacio")
+	private String direccion;
 	
 	@Column(name="PasswordEncripted")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String passwordEncripted;
 	
 	@Column(name="Estado")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String Estado;
+	private Boolean Estado;
 
 	public Integer getUserAdminID() {
 		return userAdminID;
@@ -164,19 +173,19 @@ public class UserAdmin {
 		this.apellido = apellido;
 	}
 
-	public String getBirthdayDate() {
+	public Date getBirthdayDate() throws ParseException{
 		return birthdayDate;
 	}
 
-	public void setBirthdayDate(String birthdayDate) {
+	public void setBirthdayDate(Date birthdayDate) {
 		this.birthdayDate = birthdayDate;
 	}
 
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
 
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 
@@ -196,12 +205,22 @@ public class UserAdmin {
 		this.passwordEncripted = passwordEncripted;
 	}
 
-	public String getEstado() {
+	public Boolean getEstado() {
 		return Estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Boolean estado) {
 		Estado = estado;
+	}
+
+	
+	
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 
 	public UserAdmin() {

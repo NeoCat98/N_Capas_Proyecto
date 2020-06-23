@@ -11,4 +11,6 @@ public interface UserAdminService {
 	public UserAdmin findOne(Integer userAdminID) throws DataAccessException;
 	public void insert(UserAdmin userAdmin) throws DataAccessException;
 	public void delete(Integer userAdminID) throws DataAccessException;
+	public void save(UserAdmin user) throws DataAccessException;
+	public UserAdmin findByUsername(String user) throws DataAccessException;
 }

@@ -2,6 +2,8 @@ package com.uca.capas.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -33,6 +35,18 @@ public class UserAdminServiceImpl implements UserAdminService{
 	@Override
 	public void delete(Integer userAdminID) throws DataAccessException {
 		userAdminRepo.deleteById(userAdminID);
+	}
+
+	@Override
+	public void save(UserAdmin user) throws DataAccessException {
+		userAdminRepo.save(user);
+		
+	}
+	
+	@Transactional
+	@Override
+	public UserAdmin findByUsername(String user) throws DataAccessException{
+		return userAdminRepo.findByUsername(user);
 	}
 
 }
