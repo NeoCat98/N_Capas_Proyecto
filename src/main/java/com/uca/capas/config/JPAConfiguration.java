@@ -1,4 +1,4 @@
-package com.uca.capas;
+package com.uca.capas.config;
 
 import java.util.Properties;
 
@@ -40,7 +40,7 @@ public class JPAConfiguration {
 		dataSource.setDriverClassName("org.postgresql.Driver");
 		dataSource.setUrl("jdbc:postgresql://localhost:5432/Proyecto");
 		dataSource.setUsername("postgres");
-		dataSource.setPassword("root");
+		dataSource.setPassword("mario");
 
 		return dataSource;
 	}
