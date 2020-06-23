@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.uca.capas.config.Encriptar;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ import com.uca.capas.service.MunicipioService;
 import com.uca.capas.service.RolService;
 import com.uca.capas.service.UserAdminService;
 
-import javassist.expr.NewArray;
+
 
 @Controller
 public class UserController {
@@ -43,7 +45,10 @@ public class UserController {
 
 	@Autowired
 	RolService rolService;
-
+	
+	
+	
+	
 	@RequestMapping("/iniciarSesion")
 	public ModelAndView inicioSesion() {
 		ModelAndView mav = new ModelAndView();
@@ -54,22 +59,26 @@ public class UserController {
 	@RequestMapping("/formIniciarSesion")
 	public ModelAndView formInicioSesion(@RequestParam String user, @RequestParam String pass) {
 		ModelAndView mav = new ModelAndView();
-
+		Encriptar en = new Encriptar();
 		UserAdmin userBD = new UserAdmin();
 		userBD = userService.findByUsername(user);
 
-		System.out.println(userBD.getPasswordEncripted());
-		System.out.println(pass);
-		if (userBD.getPasswordEncripted().equals(pass)) {
-			mav.addObject("UserAdmin",userBD);
-			if(userBD.getRol().getRolID().equals(1)) {
-				mav.setViewName("dashboard");
-			}else {
-				mav.setViewName("co-opciones");
+		
+		try {
+			if (en.decrypt(userBD.getPasswordEncripted()).equals(pass)) {
+				mav.addObject("UserAdmin",userBD);
+				if(userBD.getRol().getRolID().equals(1)) {
+					mav.setViewName("dashboard");
+				}else {
+					mav.setViewName("co-opciones");
+				}
+				//mav.setViewName("index");
+			} else {
+				mav.setViewName("inicioSesion");
 			}
-			//mav.setViewName("index");
-		} else {
-			mav.setViewName("inicioSesion");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
 		}
 
 		return mav;
@@ -105,13 +114,13 @@ public class UserController {
 	@RequestMapping("/formRegistro")
 	public ModelAndView formRegistro(@Valid @ModelAttribute UserAdmin user, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-
+		Encriptar en = new Encriptar();
 		try {
 			if (user.getEstado() == null) {
 				user.setEstado(false);
 			}
-			// Date date=new SimpleDateFormat("dd/MM/yyyy").parse(user.getBirthdayDate());
-			// user.setBirthdayDate(date);
+			
+			user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
 			userService.save(user);
 		} catch (Exception e) {
 			e.printStackTrace();
