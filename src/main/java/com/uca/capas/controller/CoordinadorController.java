@@ -14,7 +14,7 @@ public class CoordinadorController {
 	public ModelAndView opciones(@RequestParam UserAdmin userAdmin) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("userAdmin", userAdmin);
-		mav.setViewName("templates/co-opciones");
+		mav.setViewName("co-opciones");
 		return mav;
 	}
 }

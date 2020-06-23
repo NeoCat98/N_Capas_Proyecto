@@ -29,93 +29,93 @@ import com.uca.capas.service.UserAdminService;
 public class UserController {
 	@Autowired
 	UserAdminService userService;
-	
+
 	@Autowired
 	CentroEscolarService centroService;
-	
+
 	@Autowired
 	DepartamentoService departamentoService;
-	
+
 	@Autowired
 	MunicipioService municipioService;
-	
+
 	@Autowired
 	RolService rolService;
-	
-	
+
 	@RequestMapping("/iniciarSesion")
 	public ModelAndView inicioSesion() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("inicioSesion");
 		return mav;
 	}
-	
+
 	@RequestMapping("/formIniciarSesion")
-	public ModelAndView formInicioSesion(@RequestParam String user,  @RequestParam String pass) {
+	public ModelAndView formInicioSesion(@RequestParam String user, @RequestParam String pass) {
 		ModelAndView mav = new ModelAndView();
-		
-		UserAdmin userBD= new UserAdmin();
-		userBD=userService.findByUsername(user);
-		
-		
+
+		UserAdmin userBD = new UserAdmin();
+		userBD = userService.findByUsername(user);
+
 		System.out.println(userBD.getPasswordEncripted());
 		System.out.println(pass);
-		if(userBD.getPasswordEncripted().equals(pass)) {
-			mav.setViewName("index");
-		}else {
+		if (userBD.getPasswordEncripted().equals(pass)) {
+			mav.addObject("UserAdmin",userBD);
+			if(userBD.getRolID()==1) {
+				mav.setViewName("dashboard");
+			}else {
+				mav.setViewName("co-opciones");
+			}
+			//mav.setViewName("index");
+		} else {
 			mav.setViewName("inicioSesion");
 		}
-		
-		
+
 		return mav;
 	}
-	
-	
+
 	@RequestMapping("/registrar")
 	public ModelAndView registrar() {
 		ModelAndView mav = new ModelAndView();
-		
-		UserAdmin user= new UserAdmin();
+
+		UserAdmin user = new UserAdmin();
 		List<Rol> roles = null;
 		List<CentroEscolar> centros = null;
 		List<Municipio> municipios = null;
 		List<Departamento> departamentos = null;
 		try {
-			departamentos=departamentoService.findAll();
-			centros=centroService.findAll();
-			municipios=municipioService.findAll();
-			roles=rolService.findAll();
-		}catch(Exception e){
+			departamentos = departamentoService.findAll();
+			centros = centroService.findAll();
+			municipios = municipioService.findAll();
+			roles = rolService.findAll();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		mav.addObject("user",user);
-		mav.addObject("departamentos",departamentos);
-		mav.addObject("centros",centros);
-		mav.addObject("municipios",municipios);
-		mav.addObject("roles",roles);
+
+		mav.addObject("user", user);
+		mav.addObject("departamentos", departamentos);
+		mav.addObject("centros", centros);
+		mav.addObject("municipios", municipios);
+		mav.addObject("roles", roles);
 		mav.setViewName("Registro");
 		return mav;
 	}
-	
+
 	@RequestMapping("/formRegistro")
 	public ModelAndView formRegistro(@Valid @ModelAttribute UserAdmin user, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		
+
 		try {
-			if(user.getEstado()==null) {
+			if (user.getEstado() == null) {
 				user.setEstado(false);
 			}
-			//Date date=new SimpleDateFormat("dd/MM/yyyy").parse(user.getBirthdayDate());  
-		    //user.setBirthdayDate(date);
+			// Date date=new SimpleDateFormat("dd/MM/yyyy").parse(user.getBirthdayDate());
+			// user.setBirthdayDate(date);
 			userService.save(user);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		mav.setViewName("index");
 		return mav;
 	}
-	
-	
-	
+
 }
