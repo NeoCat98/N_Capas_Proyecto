@@ -119,7 +119,7 @@ public class UserController {
 			if (user.getEstado() == null) {
 				user.setEstado(false);
 			}
-			
+		
 			user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
 			userService.save(user);
 		} catch (Exception e) {
