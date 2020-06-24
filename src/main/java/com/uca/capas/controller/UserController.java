@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uca.capas.domain.Alumno;
 import com.uca.capas.domain.CentroEscolar;
 import com.uca.capas.domain.Departamento;
 import com.uca.capas.domain.Municipio;
@@ -27,10 +28,9 @@ import com.uca.capas.service.MunicipioService;
 import com.uca.capas.service.RolService;
 import com.uca.capas.service.UserAdminService;
 
-
-
 @Controller
 public class UserController {
+
 	@Autowired
 	UserAdminService userService;
 
@@ -45,10 +45,7 @@ public class UserController {
 
 	@Autowired
 	RolService rolService;
-	
-	
-	
-	
+
 	@RequestMapping("/iniciarSesion")
 	public ModelAndView inicioSesion() {
 		ModelAndView mav = new ModelAndView();
@@ -61,23 +58,25 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		Encriptar en = new Encriptar();
 		UserAdmin userBD = new UserAdmin();
+		Alumno alumno = new Alumno();
+		alumno.setAlumnoID(2);
 		userBD = userService.findByUsername(user);
 
-		
 		try {
 			if (en.decrypt(userBD.getPasswordEncripted()).equals(pass)) {
-				mav.addObject("UserAdmin",userBD);
-				if(userBD.getRol().getRolID().equals(1)) {
+				mav.addObject("UserAdmin", userBD);
+				mav.addObject("Alumno", alumno);
+				if (userBD.getRol().getRolID().equals(1)) {
 					mav.setViewName("dashboard");
-				}else {
+				} else {
 					mav.setViewName("co-opciones");
 				}
-				//mav.setViewName("index");
+				// mav.setViewName("index");
 			} else {
 				mav.setViewName("inicioSesion");
 			}
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -119,7 +118,7 @@ public class UserController {
 			if (user.getEstado() == null) {
 				user.setEstado(false);
 			}
-		
+
 			user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
 			userService.save(user);
 		} catch (Exception e) {

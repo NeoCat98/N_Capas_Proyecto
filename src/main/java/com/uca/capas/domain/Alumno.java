@@ -67,7 +67,7 @@ public class Alumno {
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String madre;
 
-	Alumno(){
+	public Alumno(){
 		
 	}
 	

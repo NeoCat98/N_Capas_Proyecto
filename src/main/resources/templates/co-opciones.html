@@ -1,54 +1,86 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 
-    <!--CUSTOM CSS-->
-    <link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/style.css">
+<!--CUSTOM CSS-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="../styles/style.css">
 
-    <title>Dashboard</title>
-  </head>
-  <body>
-    
-    <div class="container mt-3">
-      <div class="wrapper d-flex flex-column">
-        <div class="navbar d-flex justify-content-end">
-          <p class="mr-auto">LOGOTIPO</p>
-          <span>Bienvenido</span>
-          <a href="#" class="btn btn-primary">Cerrar Sesion</a>
-        </div>
-        <div class="mid-section">
-          <h3>Catalogos.</h3>
-          <p>Escoja el catalogo que desee visualizar y editar.</p>
-        </div>
-        <div class="main-content flex-grow-1 d-flex flex-wrap justify-content-around">
-          <div class="tarjeta d-flex flex-column-reverse align-items-center">
-            <a href="#"><img src="../img/undraw_Building_vpxo.svg" alt=""></a>
-            <a id="nombre-tarjeta" href="#">Listados</a>
-          </div>
-          <div class="tarjeta d-flex flex-column-reverse align-items-center">
-            <a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
-            <a id="nombre-tarjeta" href="#">Materias</a>
-          </div>
-          <div class="tarjeta d-flex flex-column-reverse align-items-center">
-            <a href="#"><img src="../img/undraw_male_avatar_323b.svg" alt=""></a>
-            <a id="nombre-tarjeta" class="mb-2" href="#">A&nacute;adir estudiante</a>
-          </div> 
-        </div>
-      </div>
-    </div>
+<title>Dashboard</title>
+</head>
+<body>
 
+	<div class="container mt-3">
+		<div class="wrapper d-flex flex-column">
+			<div class="navbar d-flex justify-content-end">
+				<p class="mr-auto">LOGOTIPO</p>
+				<span>Bienvenido</span> <a href="#" class="btn btn-primary">Cerrar
+					Sesion</a>
+			</div>
+			<div class="mid-section">
+				<h3>Catalogos.</h3>
+				<p>Escoja el catalogo que desee visualizar y editar.</p>
+			</div>
+			<div
+				class="main-content flex-grow-1 d-flex flex-wrap justify-content-around">
+				<div class="tarjeta d-flex flex-column-reverse align-items-center">
+					<a href="#"><img src="../img/undraw_Building_vpxo.svg" alt=""></a>
+					<a id="nombre-tarjeta" href="#">Listados</a>
+				</div>
+				<div class="tarjeta d-flex flex-column-reverse align-items-center">
+					<a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
+					<a id="nombre-tarjeta" href="#">Materias</a>
+				</div>
+				<form th:action="@{/opciones}" method="post" th:object="${Alumno}">
+					<input type="hidden" name="alumnoID" th:field="*{alumnoID}"/>
+					<div th:object="${UserAdmin}">
+						<input type="hidden" name="userAdminID" th:field="*{userAdminID}" />
+					</div>
+					<button type="submit" class="reset-this"  >
+						<div class="tarjeta d-flex flex-column-reverse align-items-center">
+							<a><img src="../img/undraw_male_avatar_323b.svg" alt=""></a>
+							<a id="nombre-tarjeta" class="mb-2">A&nacute;adir estudiante</a>
+						</div>
+					</button>
+				</form>
+			</div>
+		</div>
+		<br>
+		<!-- <form th:action="@{/opciones}" method="post" th:object="${Alumno}">
+      	<input type="number" name="alumnoID" th:field="*{alumnoID}"/>
+      	<div th:object="${UserAdmin}">
+      	<input type="hidden" name="userAdminID" th:field="*{userAdminID}"/>
+      	<input type="hidden" name="nombre" th:field="*{nombre}"/>
+      	</div>
+      	<br><input type="submit" class="btn btn-primary" value="Actualizar Estudiante">
+      </form> -->
+	</div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
+	<!-- <br><button class="btn btn-primary" onclick="window.location.href='/opciones'">Listado</button> -->
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+		crossorigin="anonymous"></script>
+</body>
 </html>
