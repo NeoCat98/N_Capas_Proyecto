@@ -43,15 +43,15 @@
 					<a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
 					<a id="nombre-tarjeta" href="#">Materias</a>
 				</div>
-				<form th:action="@{/opciones}" method="post" th:object="${Alumno}">
+				<form th:action="@{/BuscarForm}" method="post" th:object="${Alumno}">
 					<input type="hidden" name="alumnoID" th:field="*{alumnoID}"/>
 					<div th:object="${UserAdmin}">
 						<input type="hidden" name="userAdminID" th:field="*{userAdminID}" />
 					</div>
-					<button type="submit" class="reset-this"  >
+					<button type="submit" class="btn btn-link"  >
 						<div class="tarjeta d-flex flex-column-reverse align-items-center">
 							<a><img src="../img/undraw_male_avatar_323b.svg" alt=""></a>
-							<a id="nombre-tarjeta" class="mb-2">A&nacute;adir estudiante</a>
+							<a id="nombre-tarjeta" class="mb-2">Expediente de Alumnos</a>
 						</div>
 					</button>
 				</form>

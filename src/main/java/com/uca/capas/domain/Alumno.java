@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -22,6 +26,13 @@ public class Alumno {
 	
 	@OneToMany(mappedBy = "alumno")
 	List<MateriaXAlumno> materiaXAlumno;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CentroEscolarID")
+    private CentroEscolar centroEscolar;
+	
+	@Transient
+	private Integer centroEscolarfk;
 	
 	@Column(name="FirstName")
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -71,6 +82,22 @@ public class Alumno {
 		
 	}
 	
+	public Integer getCentroEscolarfk() {
+		return centroEscolarfk;
+	}
+
+	public void setCentroEscolarfk(Integer centroEscolarfk) {
+		this.centroEscolarfk = centroEscolarfk;
+	}
+
+	public CentroEscolar getCentroEscolar() {
+		return centroEscolar;
+	}
+
+	public void setCentroEscolar(CentroEscolar centroEscolar) {
+		this.centroEscolar = centroEscolar;
+	}
+
 	public Integer getAlumnoID() {
 		return alumnoID;
 	}

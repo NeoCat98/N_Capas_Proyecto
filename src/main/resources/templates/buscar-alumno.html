@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Expedientes de Alumnos</title>
+</head>
+<body>
+	<form th:action="@{/listAlumno}" method="post">
+		<input type="text" name="fullname"/>
+		<div th:object="${UserAdmin}">
+			<input type="hidden" name="userAdminID" th:field="*{userAdminID}" />
+		</div>
+		<button type="submit" class="btn btn-link">
+			<div class="tarjeta d-flex flex-column-reverse align-items-center">
+				<a><img src="../img/undraw_male_avatar_323b.svg" alt=""></a> <a
+					id="nombre-tarjeta" class="mb-2">A&nacute;adir estudiante</a>
+			</div>
+		</button>
+	</form>
+</body>
+</html>

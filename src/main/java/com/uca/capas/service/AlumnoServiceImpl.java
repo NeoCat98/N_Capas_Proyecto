@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.uca.capas.domain.Alumno;
+import com.uca.capas.domain.CentroEscolar;
 import com.uca.capas.repositories.AlumnoRepo;
 
 @Repository
@@ -37,6 +38,12 @@ public class AlumnoServiceImpl implements AlumnoService{
 	@Transactional
 	public void delete(Integer alumnoID) throws DataAccessException {
 		alumnoRepo.deleteById(alumnoID);
+	}
+
+	@Override
+	public List<Alumno> buscarFLname(String firstName, String lastName, Integer centroEscolar) throws DataAccessException {
+		
+		return alumnoRepo.findByFirstNameLikeAndLastNameLikeANDCentroEscolar(firstName, lastName, centroEscolar);
 	}
 
 }
