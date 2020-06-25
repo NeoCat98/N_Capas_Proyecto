@@ -49,7 +49,7 @@ public class AlumnoServiceImpl implements AlumnoService{
 	@Override
 	public List<Alumno> buscarFLnameAndC(String firstName, String lastName, Integer centroEscolar){
 		
-		return null;
+		return alumnoRepo.findByFirstNameLikeAndLastNameLikeANDCentroEscolar(firstName, lastName, centroEscolar);
 	}
 
 }

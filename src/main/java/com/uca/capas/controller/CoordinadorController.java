@@ -49,8 +49,12 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 
 		UserAdmin user = userAdminService.findOne(userAdmin.getUserAdminID());
+		
+		System.out.println(nombres.get(0)+" "+nombres.get(1)+"..");
 
-		List<Alumno> list = alumnoService.buscarFLname(fullname+"%","%");
+		List<Alumno> list = alumnoService.buscarFLname(nombres.get(0)+"%",nombres.get(1)+"%");
+		List<Alumno> filtradAlumnos = alumnoService.buscarFLnameAndC("%", "%", user.getCentroEscolar().getCentroEscolarID());
+		System.out.println(filtradAlumnos.size());
 
 		System.out.println(user.getCentroEscolar().getCentroEscolarID());
 		/*
@@ -59,7 +63,7 @@ public class CoordinadorController {
 		 * getCentroEscolarID()) filtradoAlumnos.add(a); });
 		 */
 
-		list.forEach(Alumno -> {
+		filtradAlumnos.forEach(Alumno -> {
 			System.out.println(Alumno.getFirstName() + " " + Alumno.getLastName() + " "
 					+ Alumno.getCentroEscolar().getCentroEscolarID());
 		});
