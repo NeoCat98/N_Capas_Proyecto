@@ -43,8 +43,7 @@
 					<a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
 					<a id="nombre-tarjeta" href="#">Materias</a>
 				</div>
-				<form th:action="@{/BuscarForm}" method="post" th:object="${Alumno}">
-					<input type="hidden" name="alumnoID" th:field="*{alumnoID}"/>
+				<form th:action="@{/BuscarForm}" method="post">
 					<div th:object="${UserAdmin}">
 						<input type="hidden" name="userAdminID" th:field="*{userAdminID}" />
 					</div>

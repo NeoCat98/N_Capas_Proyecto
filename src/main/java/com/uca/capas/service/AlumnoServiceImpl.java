@@ -41,9 +41,15 @@ public class AlumnoServiceImpl implements AlumnoService{
 	}
 
 	@Override
-	public List<Alumno> buscarFLname(String firstName, String lastName, Integer centroEscolar) throws DataAccessException {
+	public List<Alumno> buscarFLname(String firstName, String lastName) throws DataAccessException {
 		
-		return alumnoRepo.findByFirstNameLikeAndLastNameLikeANDCentroEscolar(firstName, lastName, centroEscolar);
+		return alumnoRepo.findByFirstNameLikeAndLastNameLike(firstName, lastName);
+	}
+
+	@Override
+	public List<Alumno> buscarFLnameAndC(String firstName, String lastName, Integer centroEscolar){
+		
+		return null;
 	}
 
 }

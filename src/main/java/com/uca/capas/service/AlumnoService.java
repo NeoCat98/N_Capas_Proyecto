@@ -16,6 +16,9 @@ public interface AlumnoService {
 
 	public void delete(Integer alumnoID) throws DataAccessException;
 
-	public List<Alumno> buscarFLname(String firstName, String lastName, Integer centroEscolar)
+	public List<Alumno> buscarFLnameAndC(String firstName, String lastName, Integer centroEscolar)
 			throws DataAccessException;
+
+	public List<Alumno> buscarFLname(String firstName, String lastName) throws DataAccessException;
+
 }

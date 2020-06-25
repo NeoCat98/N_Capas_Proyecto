@@ -1,5 +1,6 @@
 package com.uca.capas.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,27 +32,25 @@ public class CoordinadorController {
 
 		return mav;
 	}
-	
+
 	@RequestMapping("/BuscarForm")
 	public ModelAndView form(@ModelAttribute UserAdmin userAdmin) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("UserAdmin",userAdmin);
+		mav.addObject("UserAdmin", userAdmin);
 		mav.setViewName("buscar-alumno");
 		return mav;
 	}
 
-	@RequestMapping("/BuscarAlumno")
-	public ModelAndView buscarAlumno(@ModelAttribute UserAdmin userAdmin,
+	@RequestMapping("/BuscarAlumnos")
+	public ModelAndView buscar(@ModelAttribute UserAdmin userAdmin,
 			@RequestParam(value = "fullname") String fullname) {
-		String[] splits = fullname.split(",");
-		splits[0]=splits[0]+"%";
-		splits[1]=splits[1]+"%";
 		
+		List<String> nombres = Arrays.asList(fullname.split(","));
 		ModelAndView mav = new ModelAndView();
 
 		UserAdmin user = userAdminService.findOne(userAdmin.getUserAdminID());
 
-		List<Alumno> list = alumnoService.buscarFLname("Ma%", "%", user.getCentroEscolar().getCentroEscolarID());
+		List<Alumno> list = alumnoService.buscarFLname(fullname+"%","%");
 
 		System.out.println(user.getCentroEscolar().getCentroEscolarID());
 		/*
