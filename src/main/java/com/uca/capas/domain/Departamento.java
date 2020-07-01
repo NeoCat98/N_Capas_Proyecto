@@ -23,8 +23,8 @@ public class Departamento {
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String departamentoName;
 	
-	@OneToMany(mappedBy = "departamento")
-    private List<UserAdmin> user;
+	//@OneToMany(mappedBy = "departamento")
+    //private List<UserAdmin> user;
 	
 	Departamento(){
 		
@@ -46,12 +46,12 @@ public class Departamento {
 		this.departamentoName = departamentoName;
 	}
 
-	public List<UserAdmin> getUser() {
-		return user;
-	}
+	//public List<UserAdmin> getUser() {
+		//return user;
+	//}
 
-	public void setUser(List<UserAdmin> user) {
-		this.user = user;
-	}
+	//public void setUser(List<UserAdmin> user) {
+		//this.user = user;
+	//}
 	
 }

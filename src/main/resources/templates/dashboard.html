@@ -29,8 +29,11 @@
         </div>
         <div class="main-content flex-grow-1 d-flex flex-wrap justify-content-around">
           <div class="tarjeta d-flex flex-column-reverse align-items-center">
-            <a href="#"><img src="../img/undraw_Building_vpxo.svg" alt=""></a>
-            <a id="nombre-tarjeta" href="#">Centros Escolares</a>
+          
+          	<form th:action="@{/usuarios}" method="get">
+          		<input type="submit" value="catalogo usuarios">
+          	</form>
+            
           </div>
           <div class="tarjeta d-flex flex-column-reverse align-items-center">
             <a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
