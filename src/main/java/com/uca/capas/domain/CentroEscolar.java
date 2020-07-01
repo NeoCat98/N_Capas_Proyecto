@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -30,6 +34,13 @@ public class CentroEscolar {
 	
 	@OneToMany(mappedBy = "centroEscolar")
     private List<UserAdmin> user;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "MunicipioID")
+	private Municipio municipio;
+	
+	@Transient
+	private Integer municipioID;
 	
 	CentroEscolar(){
 		
@@ -66,5 +77,22 @@ public class CentroEscolar {
 	public void setUser(List<UserAdmin> user) {
 		this.user = user;
 	}
+
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	public Integer getMunicipioID() {
+		return municipioID;
+	}
+
+	public void setMunicipioID(Integer municipioID) {
+		this.municipioID = municipioID;
+	}
+	
 	
 }

@@ -34,6 +34,13 @@ public class Alumno {
 	@Transient
 	private Integer centroEscolarfk;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name= "MunicipioID")
+	private Municipio municipio;
+	
+	@Transient
+	private Integer municipioID;
+	
 	@Column(name="FirstName")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String firstName;
@@ -200,6 +207,22 @@ public class Alumno {
 
 	public void setMadre(String madre) {
 		this.madre = madre;
+	}
+
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	public Integer getMunicipioID() {
+		return municipioID;
+	}
+
+	public void setMunicipioID(Integer municipioID) {
+		this.municipioID = municipioID;
 	}
 	
 }

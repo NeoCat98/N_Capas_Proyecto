@@ -47,13 +47,6 @@ public class UserAdmin {
 	@Transient
 	private Integer municipioID;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="DepartamentoID")
-	private Departamento departamento;
-		
-	@Transient
-	private Integer departamentoID;
-	
 	@Column(name="Nombre")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String nombre;
@@ -141,22 +134,6 @@ public class UserAdmin {
 		this.municipioID = municipioID;
 	}
 
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-
-	public Integer getDepartamentoID() {
-		return departamentoID;
-	}
-
-	public void setDepartamentoID(Integer departamentoID) {
-		this.departamentoID = departamentoID;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -212,8 +189,6 @@ public class UserAdmin {
 	public void setEstado(Boolean estado) {
 		Estado = estado;
 	}
-
-	
 	
 	public String getDireccion() {
 		return direccion;
