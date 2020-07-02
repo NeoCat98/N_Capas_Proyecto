@@ -9,6 +9,14 @@ switch(a){
 		carga="./cargarUsuario";
 		procesar='./editarUsuario?id=';
 		break;
+	case "2":
+		carga="./cargarMateria";
+		procesar='./editarMateria?id=';
+		break;
+	case "3":
+		carga="./cargarCentro";
+		procesar='./editarCentro?id=';
+		break;
 	default:
 		carga='#';
 		procesar='#';
@@ -31,7 +39,7 @@ $(document).ready(function(){
 	            "targets": 0,
 	            "data": null,
 	            "searchable": false,
-	            "defaultContent": "<button class='btn btn-info' title='Editar Usuario' id='i'><i class='fa fa-pencil-alt'></i></button>"
+	            "defaultContent": "<button class='btn btn-info' title='Editar' id='i'><i class='fa fa-pencil-alt'></i></button>"
 	        }]
 	    });
 	    $('#tabla tbody').on( 'click', '#i', function () {
