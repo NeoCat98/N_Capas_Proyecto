@@ -31,17 +31,34 @@
           <div class="tarjeta d-flex flex-column-reverse align-items-center">
           
           	<form th:action="@{/usuarios}" method="get">
-          		<input type="submit" value="catalogo usuarios">
+          		<input type="submit" value="catalogo usuarios" class="btn btn-info">
           	</form>
+          	
+          	<a href="#"><img src="../img/undraw_male_avatar_323b.svg" alt=""></a>
+            <!--  <a id="nombre-tarjeta" class="mb-2" href="#">Usuarios</a>-->
+            
+          	
             
           </div>
+          
           <div class="tarjeta d-flex flex-column-reverse align-items-center">
+          
+          	<form th:action="@{/materias}" method="get">
+          		<input type="submit" value="catalogo materias" class="btn btn-info">
+          	</form>
+          
             <a href="#"><img src="../img/undraw_book_lover_mkck.svg" alt=""></a>
-            <a id="nombre-tarjeta" href="#">Materias</a>
+             <!--<a id="nombre-tarjeta" href="#">Materias</a>-->
           </div>
+          
           <div class="tarjeta d-flex flex-column-reverse align-items-center">
-            <a href="#"><img src="../img/undraw_male_avatar_323b.svg" alt=""></a>
-            <a id="nombre-tarjeta" class="mb-2" href="#">Centros Escolares</a>
+          
+          	<form th:action="@{/centros}" method="get">
+          		<input type="submit" value="catalogo centros" class="btn btn-info">
+          	</form>
+          	
+          	<a href="#"><img src="../img/undraw_Building_vpxo.svg" alt=""></a>
+             <!--<a id="nombre-tarjeta" class="mb-2" href="#">Centros Escolares</a>-->
           </div> 
         </div>
       </div>
