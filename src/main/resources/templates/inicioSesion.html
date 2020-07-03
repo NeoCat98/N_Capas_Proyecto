@@ -16,8 +16,8 @@
 	  	<div class="card-body">
 	    	<form th:action="@{/formIniciarSesion}" method="post">
 		      <input type="text" id="user" class="form-control" name="user"placeholder="username">
-		      <span th:field="${error}"></span>
 		      <input type="password" id="pass" class="form-control" name="pass"  placeholder="password">
+		      <span th:field="${error}"></span>
 		      <input type="submit" class="btn btn-primary" value="inicioSesion">
 		    </form>
 	  	</div>
