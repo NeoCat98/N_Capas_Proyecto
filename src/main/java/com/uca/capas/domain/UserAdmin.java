@@ -1,8 +1,9 @@
 package com.uca.capas.domain;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+
+
+import com.uca.capas.config.Encriptar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
+import java.sql.Date;
 import java.text.ParseException;
 
 @Entity
@@ -150,7 +152,8 @@ public class UserAdmin {
 		this.apellido = apellido;
 	}
 
-	public Date getBirthdayDate() throws ParseException{
+	public Date getBirthdayDate(){
+
 		return birthdayDate;
 	}
 
@@ -174,11 +177,13 @@ public class UserAdmin {
 		this.username = username;
 	}
 
-	public String getPasswordEncripted() {
+	public String getPasswordEncripted(){
+		
 		return passwordEncripted;
 	}
 
-	public void setPasswordEncripted(String passwordEncripted) {
+	public void setPasswordEncripted(String passwordEncripted){
+		
 		this.passwordEncripted = passwordEncripted;
 	}
 

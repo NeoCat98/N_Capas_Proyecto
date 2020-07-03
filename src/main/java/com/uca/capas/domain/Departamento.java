@@ -26,7 +26,7 @@ public class Departamento {
 	//@OneToMany(mappedBy = "departamento")
     //private List<UserAdmin> user;
 	
-	Departamento(){
+	public Departamento(){
 		
 	}
 

@@ -29,7 +29,7 @@ public class CentroEscolarServiceImpl implements CentroEscolarService{
 
 	@Override
 	@Transactional
-	public void insert(CentroEscolar centroEscolar) throws DataAccessException {
+	public void save(CentroEscolar centroEscolar) throws DataAccessException {
 		centroEscolarRepo.save(centroEscolar);
 	}
 

@@ -26,7 +26,7 @@ public class Materia {
 	@OneToMany(mappedBy = "materia")
 	List<MateriaXAlumno> materiaXAlumno;
 	
-	Materia(){
+	public Materia(){
 		
 	}
 

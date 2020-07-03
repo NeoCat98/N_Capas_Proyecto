@@ -43,7 +43,7 @@ public class Municipio {
 	@OneToMany(mappedBy = "municipio")
     private List<CentroEscolar> centroEscolar;
 
-	Municipio(){
+	public Municipio(){
 		
 	}
 	
