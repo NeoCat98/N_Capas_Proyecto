@@ -6,19 +6,25 @@ import java.util.List;
 
 import com.uca.capas.config.Encriptar;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.domain.Alumno;
 import com.uca.capas.domain.CentroEscolar;
 import com.uca.capas.domain.Departamento;
+import com.uca.capas.domain.Login;
 import com.uca.capas.domain.Municipio;
 import com.uca.capas.domain.Rol;
 import com.uca.capas.domain.UserAdmin;
@@ -46,62 +52,72 @@ public class UserController {
 	@Autowired
 	RolService rolService;
 
-	@RequestMapping("/iniciarSesion")
-	public ModelAndView inicioSesion() {
-		ModelAndView mav = new ModelAndView();
+	@RequestMapping("/SingOut")
+	public ModelAndView singOut(HttpSession request,@RequestParam UserAdmin user) {
+		ModelAndView mav =  new ModelAndView();
+		user.setEstado(false);
+		request.invalidate();
+		userService.insert(user);
 		mav.setViewName("inicioSesion");
 		return mav;
 	}
+	
+	 @RequestMapping(value = "/IniciarSesion")
+	 public ModelAndView showLogin(HttpSession request) {
+	 	ModelAndView mav = new ModelAndView();
+	 	if(request.getAttribute("usuario") == null) {
+	 		mav.addObject("error","");
+	 		mav.setViewName("inicioSesion");
+	 	}
+	 	else {
+	 		mav.setViewName("redirect:/index");
+	 	}
+	 	return mav;
+	 }
 
-	@RequestMapping("/formIniciarSesion")
-	public ModelAndView formInicioSesion(@RequestParam String user, @RequestParam String pass) {
+	@RequestMapping(value = "/formIniciarSesion", method = RequestMethod.POST)
+	public ModelAndView loginProcess(HttpSession request,@RequestParam String user, @RequestParam String pass) {
 		ModelAndView mav = new ModelAndView();
-		Encriptar en = new Encriptar();
 		UserAdmin userBD = new UserAdmin();
-		Alumno alumno = new Alumno();
 		userBD = userService.findByUsername(user);
-
-		try {
-			if (en.decrypt(userBD.getPasswordEncripted()).equals(pass)) {
-				mav.addObject("UserAdmin", userBD);
-				mav.addObject("Alumno", alumno);
-				if (userBD.getRol().getRolID().equals(1)) {
-					mav.setViewName("dashboard");
-				} else {
-					mav.setViewName("co-opciones");
+	    if(request.getAttribute("usuario") == null) {
+			if (null != userBD) {
+				if (userBD.getPasswordEncripted().equals(pass)) {
+				    request.setAttribute("usuario", userBD);
+				    mav.setViewName("redirect:/index");
 				}
-				// mav.setViewName("index");
-			} else {
-				mav.setViewName("inicioSesion");
-			}
-		} catch (Exception e) {
-
-			e.printStackTrace();
+		    } else {
+		    	mav.addObject("error", "Username or Password is wrong!!");
+		        mav.setViewName("redirect:/InicioSesion");
+		    }
+	    }else {
+	    	mav.setViewName("redirect:/InicioSesion");
+	    }
+	    return mav;
+	}
+	
+	@RequestMapping("/index")
+	public ModelAndView index(HttpSession request) {
+		ModelAndView mav = new ModelAndView();
+		UserAdmin user = new UserAdmin();
+		user = (UserAdmin) request.getAttribute("usuario");
+		if(user.getRol().getRolID().equals(1)) {
+			mav.setViewName("dashboard");
+		}else {
+			mav.addObject("UserAdmin",user);
+			mav.setViewName("co-opciones");
 		}
-
 		return mav;
 	}
 
 	@RequestMapping("/registrar")
 	public ModelAndView registrar() {
 		ModelAndView mav = new ModelAndView();
-
 		UserAdmin user = new UserAdmin();
-		List<Rol> roles = null;
-		List<CentroEscolar> centros = null;
-		List<Municipio> municipios = null;
-		List<Departamento> departamentos = null;
-		
-		
-		try {
-			departamentos = departamentoService.findAll();
-			centros = centroService.findAll();
-			municipios = municipioService.findAll();
-			roles = rolService.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(municipios.get(1).getDepartamento().getDepartamentoName());
+		List<Rol> roles = rolService.findAll();
+		List<CentroEscolar> centros= centroService.findAll();
+		List<Municipio> municipios  = municipioService.findAll();
+		List<Departamento> departamentos = departamentoService.findAll();
 		mav.addObject("user", user);
 		mav.addObject("departamentos", departamentos);
 		mav.addObject("centros", centros);
@@ -119,7 +135,6 @@ public class UserController {
 			if (user.getEstado() == null) {
 				user.setEstado(false);
 			}
-
 			user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
 			userService.save(user);
 		} catch (Exception e) {
