@@ -35,6 +35,7 @@ $(document).ready(function(){
 	        },
 	        "paging": false,
 	        "info": false,
+	        "searching": false,
 	        "columnDefs": [ {
 	            "targets": 0,
 	            "data": null,
@@ -44,7 +45,7 @@ $(document).ready(function(){
 	    });
 	    $('#tabla tbody').on( 'click', '#i', function () {
 	        var data = table.row( $(this).parents('tr') ).data();
-	            location.href = referencia + data[0];
+	            location.href = procesar + data[0];
 	    } );
 	});
 

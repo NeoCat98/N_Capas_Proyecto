@@ -35,4 +35,10 @@ public class MateriaServiceImpl implements MateriaService{
 		materiaRepo.deleteById(materiaID);
 	}
 
+	@Override
+	public void save(Materia materia) throws DataAccessException {
+		materiaRepo.save(materia);
+		
+	}
+
 }

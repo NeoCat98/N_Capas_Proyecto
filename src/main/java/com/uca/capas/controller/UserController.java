@@ -59,7 +59,6 @@ public class UserController {
 		Encriptar en = new Encriptar();
 		UserAdmin userBD = new UserAdmin();
 		Alumno alumno = new Alumno();
-		alumno.setAlumnoID(2);
 		userBD = userService.findByUsername(user);
 
 		try {
@@ -92,6 +91,8 @@ public class UserController {
 		List<CentroEscolar> centros = null;
 		List<Municipio> municipios = null;
 		List<Departamento> departamentos = null;
+		
+		
 		try {
 			departamentos = departamentoService.findAll();
 			centros = centroService.findAll();
@@ -100,7 +101,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(municipios.get(1).getDepartamento().getDepartamentoName());
 		mav.addObject("user", user);
 		mav.addObject("departamentos", departamentos);
 		mav.addObject("centros", centros);

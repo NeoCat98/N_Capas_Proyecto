@@ -42,7 +42,7 @@ public class CentroEscolar {
 	@Transient
 	private Integer municipioID;
 	
-	CentroEscolar(){
+	public CentroEscolar(){
 		
 	}
 
