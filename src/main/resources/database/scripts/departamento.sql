@@ -1,0 +1,14 @@
+insert into public.departamento (departamentoname) values ('Ahuachapán');
+insert into public.departamento (departamentoname) values ('Cabañas');
+insert into public.departamento (departamentoname) values ('Chalatenango');
+insert into public.departamento (departamentoname) values ('Cuscatlán');
+insert into public.departamento (departamentoname) values ('La Libertad');
+insert into public.departamento (departamentoname) values ('La Paz');
+insert into public.departamento (departamentoname) values ('La Unión');
+insert into public.departamento (departamentoname) values ('Morazán');
+insert into public.departamento (departamentoname) values ('San Miguel');
+insert into public.departamento (departamentoname) values ('San Salvador');
+insert into public.departamento (departamentoname) values ('San Vicente');
+insert into public.departamento (departamentoname) values ('Santa Ana');
+insert into public.departamento (departamentoname) values ('Sonsonate');
+insert into public.departamento (departamentoname) values ('Usulután');
