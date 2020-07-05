@@ -17,6 +17,9 @@ switch(a){
 		carga="./cargarCentro";
 		procesar='./editarCentro?id=';
 		break;
+	case "4":
+		carga="/materiasCursadas";
+		procesar="/editarMateriaCursada";
 	default:
 		carga='#';
 		procesar='#';

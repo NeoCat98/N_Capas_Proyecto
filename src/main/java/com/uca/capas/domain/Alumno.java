@@ -1,5 +1,6 @@
 package com.uca.capas.domain;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -54,12 +55,10 @@ public class Alumno {
 	private String carnet;
 	
 	@Column(name="BirthdayDate")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String birthdayDate;
+	private Date birthdayDate;
 	
-	@Column(name="Edad")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String edad;
+	@Column(name="Edad")	
+	private Integer edad;
 	
 	@Column(name="Direccion")
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -73,9 +72,7 @@ public class Alumno {
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String telefonoMovil;
 	
-	@Column(name="InstitucionDeProcedencia")
-	@NotEmpty(message="Este campo no puede estar vacio")
-	private String institucion;
+
 	
 	@Column(name="NombreDelPadre")
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -145,19 +142,19 @@ public class Alumno {
 		this.carnet = carnet;
 	}
 
-	public String getBirthdayDate() {
+	public Date getBirthdayDate() {
 		return birthdayDate;
 	}
 
-	public void setBirthdayDate(String birthdayDate) {
+	public void setBirthdayDate(Date birthdayDate) {
 		this.birthdayDate = birthdayDate;
 	}
 
-	public String getEdad() {
+	public Integer getEdad() {
 		return edad;
 	}
 
-	public void setEdad(String edad) {
+	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
 
@@ -185,13 +182,6 @@ public class Alumno {
 		this.telefonoMovil = telefonoMovil;
 	}
 
-	public String getInstitucion() {
-		return institucion;
-	}
-
-	public void setInstitucion(String institucion) {
-		this.institucion = institucion;
-	}
 
 	public String getPadre() {
 		return padre;
