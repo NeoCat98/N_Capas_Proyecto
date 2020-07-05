@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>Editar Expediente</title>
+</head>
+<body>
+
+	<form th:action="@{/formExpediente}" method="post" th:object="${alumno}">
+	
+		<input type="hidden" th:field="${alumno.alumnoID}">
+	
+		<div class="form-group col-md-6">
+		 	<label for="inputNombre">Nombres: </label>
+		 	<input type="text" class="form-control" id="inputNombre" th:field="${alumno.firstName}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputApellido">Apellidos: </label>
+		 	<input type="text" class="form-control" id="inputApellido" th:field="${alumno.lastName}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputCarnet">Carnet: </label>
+		 	<input type="text" class="form-control" id="inputCarnet" th:field="${alumno.carnet}">
+		</div>
+		<div class="form-group col-md-6">
+		 	<label for="inputFecha">Fecha de nacimiento: </label>
+		 	<input type="date" class="form-control" id="inputFecha" th:field="${alumno.birthdayDate}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputFecha">Edad: </label>
+		 	<input type="number" class="form-control" id="inputFecha" th:field="${alumno.edad}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputDir">Direccion: </label>
+		 	<input type="text" class="form-control" id="inputDir" th:field="${alumno.direccion}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputF">Telefono Fijo: </label>
+		 	<input type="text" class="form-control" id="inputF" th:field="${alumno.telefonoFijo}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputTM">Telefono Movil: </label>
+		 	<input type="text" class="form-control" id="inputTM" th:field="${alumno.telefonoMovil}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputNP">Nombre padre: </label>
+		 	<input type="text" class="form-control" id="inputNP" th:field="${alumno.padre}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputNM">Nombre madre: </label>
+		 	<input type="text" class="form-control" id="inputNM" th:field="${alumno.madre}">
+		</div>
+		
+		<div class="form-group">
+			<label for="inputMuni">Municipio</label>
+			<select id="inputMuni" class="form-control" th:field="*{municipio.municipioID}">
+				<option th:each="muni : ${municipios}"
+						th:value=${muni.municipioID}
+						th:text="${muni.municipioName}"/>
+			</select>
+		</div>
+		
+		<div class="form-group">
+			<label for="inputCentro">CentroEscolar</label>
+			<select id="inputCentro" class="form-control" th:field="*{centroEscolar.centroEscolarID}">
+				<option th:each="cen : ${centros}"
+						th:value=${cen.centroEscolarID}
+						th:text="${cen.CentroEscolarName}"/>
+			</select>
+		</div>
+		
+		<input type="Submit" value="Enviar form" class="btn btn-primary">
+	</form>
+
+</body>
+</html>

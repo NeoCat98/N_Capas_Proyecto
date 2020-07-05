@@ -79,12 +79,19 @@ public class UserController {
 	public ModelAndView loginProcess(HttpSession request,@RequestParam String user, @RequestParam String pass) {
 		ModelAndView mav = new ModelAndView();
 		UserAdmin userBD = new UserAdmin();
+		Encriptar en = new Encriptar();
 		userBD = userService.findByUsername(user);
 	    if(request.getAttribute("usuario") == null) {
 			if (null != userBD) {
-				if (userBD.getPasswordEncripted().equals(pass)) {
-				    request.setAttribute("usuario", userBD);
-				    mav.setViewName("redirect:/index");
+				try {
+					if (en.decrypt(userBD.getPasswordEncripted()).equals(pass)) {
+					    request.setAttribute("usuario", userBD);
+					    mav.setViewName("redirect:/index");
+					}
+				} catch (Exception e) {
+			    	mav.addObject("error", "Ha ocurrido un error al intentar verificar la contraseña!!");
+			    	mav.setViewName("redirect:/index");
+					e.printStackTrace();
 				}
 		    } else {
 		    	mav.addObject("error", "Username or Password is wrong!!");
