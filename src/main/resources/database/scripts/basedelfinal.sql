@@ -56,7 +56,6 @@ CREATE TABLE public.Alumno (
 	Direccion			VARCHAR(300) NOT NULL,
 	TelefonoFijo		VARCHAR(8)	NOT NULL,
 	TelefonoMovil		VARCHAR(8)	NOT NULL,
-	InstitucionDeProcedencia VARCHAR(100) NOT NULL,
 	NombreDelPadre		VARCHAR(50) NOT NULL,
 	NombreDeLaMadre		VARCHAR(50) NOT NULL
 );
