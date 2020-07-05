@@ -1,5 +1,6 @@
 package com.uca.capas.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,11 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.domain.Alumno;
+import com.uca.capas.domain.CentroEscolar;
+import com.uca.capas.domain.Municipio;
 import com.uca.capas.domain.UserAdmin;
+import com.uca.capas.dto.AlumnoDTO;
+import com.uca.capas.dto.ExpedienteDTO;
+import com.uca.capas.dto.TablaDTO;
 import com.uca.capas.service.AlumnoService;
+import com.uca.capas.service.CentroEscolarService;
+import com.uca.capas.service.MunicipioService;
 import com.uca.capas.service.UserAdminService;
 
 @Controller
@@ -24,52 +33,118 @@ public class CoordinadorController {
 	@Autowired
 	AlumnoService alumnoService;
 
-	@RequestMapping("/opciones")
-	public ModelAndView opciones(@ModelAttribute UserAdmin userAdmin) {
+	@Autowired
+	CentroEscolarService centroService;
+	
+	@Autowired
+	MunicipioService municipioService;
+	
+	
+	@RequestMapping("/coordinadorIndex")
+	public ModelAndView coordinadorIndex() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("UserAdmin", userAdmin);
-		mav.setViewName("co-opciones");
-
+		mav.setViewName("co-buscador");
 		return mav;
-	}
-
-	@RequestMapping("/BuscarForm")
-	public ModelAndView form(@ModelAttribute UserAdmin userAdmin) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("UserAdmin", userAdmin);
-		mav.setViewName("buscar-alumno");
-		return mav;
-	}
-
-	@RequestMapping("/BuscarAlumnos")
-	public ModelAndView buscar(@ModelAttribute UserAdmin userAdmin,
-			@RequestParam(value = "fullname") String fullname) {
 		
-		List<String> nombres = Arrays.asList(fullname.split(","));
+	}
+	
+	
+	@RequestMapping("/nuevoExpediente")
+	public ModelAndView nuevoExpediente() {
 		ModelAndView mav = new ModelAndView();
-
-		UserAdmin user = userAdminService.findOne(userAdmin.getUserAdminID());
+		Alumno alumno = new Alumno();
+		List<Municipio> municipios = null;
+		List<CentroEscolar> centros = null;
 		
-		System.out.println(nombres.get(0)+" "+nombres.get(1)+"..");
+		
+		municipios= municipioService.findAll();
+		centros=centroService.findAll();
+		
+		mav.addObject("municipios",municipios);
+		mav.addObject("centros",centros);
+		mav.addObject("alumno",alumno);
+		mav.setViewName("nuevoExpediente");
+		return mav;
+		
+	}
+	
 
-		List<Alumno> list = alumnoService.buscarFLname(nombres.get(0)+"%",nombres.get(1)+"%");
-		List<Alumno> filtradAlumnos = alumnoService.buscarFLnameAndC("%", "%", user.getCentroEscolar().getCentroEscolarID());
-		System.out.println(filtradAlumnos.size());
-
-		System.out.println(user.getCentroEscolar().getCentroEscolarID());
-		/*
-		 * List<Alumno> filtradoAlumnos = new ArrayList<Alumno>(); list.forEach(a -> {
-		 * if(a.getCentroEscolar().getCentroEscolarID()==user.getCentroEscolar().
-		 * getCentroEscolarID()) filtradoAlumnos.add(a); });
-		 */
-
-		filtradAlumnos.forEach(Alumno -> {
-			System.out.println(Alumno.getFirstName() + " " + Alumno.getLastName() + " "
-					+ Alumno.getCentroEscolar().getCentroEscolarID());
-		});
-
-		mav.addObject("UserAdmin", userAdmin);
-		mav.setViewName("list-alumno");
+	@RequestMapping("/formExpediente")
+	public ModelAndView formExpediente(@ModelAttribute Alumno alumno) {
+		ModelAndView mav = new ModelAndView();
+		
+		alumnoService.insert(alumno);
+		
+		mav.setViewName("co-buscador");
 		return mav;
 	}
+	
+	@RequestMapping("/expedientes")
+	public ModelAndView usuario(@RequestParam String tipoBusqueda, @RequestParam String valorAlumno) {
+		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(tipoBusqueda);
+		System.out.println(valorAlumno);
+		mav.addObject("tipoBusqueda",tipoBusqueda);
+		mav.addObject("valorAlumno",valorAlumno);
+		mav.setViewName("expedientes");
+		return mav;
+	}
+	
+	@RequestMapping("/cargaExpedientes")
+	public @ResponseBody TablaDTO cargaExpedientes(@RequestParam String tipoBusqueda, @RequestParam String valorAlumno) {
+		
+		System.out.println("Controlador2: "+tipoBusqueda);
+		System.out.println(valorAlumno);
+		
+		List<ExpedienteDTO> expedientes = null;
+		List<String[]> lista = new ArrayList<>();
+		if(tipoBusqueda.equals("0")) {
+			expedientes=alumnoService.obtenerExpedienteNombre(valorAlumno, "");
+		}else {
+			expedientes=alumnoService.obtenerExpedienteNombre("", valorAlumno);
+		}
+		for(ExpedienteDTO exp : expedientes) {
+			
+			lista.add(new String[] {exp.getAlumnoid().toString(),exp.getNombre().toString(),exp.getApellido().toString()
+					,exp.getMateriasA().toString(),exp.getMateriasR().toString(),exp.getPromedio().toString()});
+		}
+		
+		TablaDTO dto = new TablaDTO();
+        dto.setData(lista);
+
+		return dto;
+		
+	}
+	
+	@RequestMapping("/editarExpediente")
+	public ModelAndView editarExpediente(@RequestParam Integer alumnoid) {
+		ModelAndView mav = new ModelAndView();
+		Alumno alumno = new Alumno();
+		alumno=alumnoService.findOne(alumnoid);
+		mav.addObject("alumno",alumno);
+		mav.setViewName("editarExpediente");
+		return mav;
+	}
+	
+	@RequestMapping("/materiasCursadas")
+	public ModelAndView materiasCursadas(@RequestParam Integer alumnoid) {
+		
+		ModelAndView mav = new ModelAndView();
+		List<AlumnoDTO> alumnos=alumnoService.obtenerMateriasCursadas(alumnoid);
+		
+		for(AlumnoDTO e : alumnos){
+			System.out.println(e.getMateria());
+			System.out.println(e.getNota());
+			System.out.println(e.getResultadoDelegate());
+			System.out.println(e.getAnio());
+			System.out.println(e.getCiclo());
+		}
+		
+		
+		mav.setViewName("index");
+		return mav;
+	}
+	
+	
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<form th:action="@{/expedientes}" method="post">
+		<div class="form-group">
+	
+			<label >Buscar Alumno por: </label>		
+			<select name="tipoBusqueda" class="form-control">
+			     <option value="0">Nombre</option>
+			     <option value="1">Apellido</option>
+	  		</select>
+  		</div>
+  		<div class="form-group">
+  			<label for="valorAlumno">Valor de busqueda: </label>
+  			<input type="text"  name="valorAlumno" id="valorAlumno">
+  		</div>
+  		
+  		<input type="submit" value="Enviar form" class="btn btn-primary">
+		
+	</form>
+	
+	<form th:action="@{/nuevoExpediente}" method="post">
+		<input type="submit" value="Nuevo expediente" class="btn btn-primary">
+	</form>
+</body>
+</html>

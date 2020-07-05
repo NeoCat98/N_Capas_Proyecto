@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+
+</head>
+
+
+
+<body>
+	
+	<input type="text" th:value="${tipoBusqueda}" id="tipoBusqueda" name="tipoBusqueda">
+	<input type="text" th:value="${valorAlumno}" id="valorAlumno" name="valorAlumno">
+	
+	<script>
+		var a=(document).getElementById('tipoBusqueda').value;
+		var b=(document).getElementById('valorAlumno').value;
+		
+		$(document).ready(function(){
+			
+		    var table = $('#tabla').DataTable( {
+		        "ordering": false,
+		        "processing": true,
+		        "serverSide": true,
+		        "ajax": './cargaExpedientes?tipoBusqueda='+a+'&valorAlumno='+b,
+		        "language": {
+		            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+		        },
+		        "paging": false,
+		        "info": false,
+		        "searching": false,
+		        "columnDefs": [ {
+		            "targets": 0,
+		            "data": null,
+		            "searchable": false,
+		            "defaultContent": "<button class='btn btn-info' title='Editar' id='i'><i class='fa fa-pencil-alt'></i></button> <button class='btn btn-info' title='Editar' id='i2'><i class='fa fa-pencil-alt'></i></button>"
+		        }]
+		    });
+		    $('#tabla tbody').on( 'click', '#i', function () {
+		        var data = table.row( $(this).parents('tr') ).data();
+		            location.href = './editarExpediente?alumnoid=' + data[0];
+		    } );
+		    $('#tabla tbody').on( 'click', '#i2', function () {
+		        var data = table.row( $(this).parents('tr') ).data();
+		            location.href = './materiasCursadas?alumnoid=' + data[0];
+		    } );
+		});
+		
+	</script>
+	
+	<table id="tabla" class="table table-striped">
+  		<thead>
+		    <tr>
+		      <th scope="col">Accion</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Apellido</th>
+		      <th scope="col">Materias aprobadas</th>
+		      <th scope="col">Materias reprobadas</th>
+		      <th scope="col">Promedio</th>
+		    </tr>
+  		</thead>
+	</table>
+	
+	
+</body>
+</html>
