@@ -1,0 +1,30 @@
+:root{
+    --background:#d8eefe;
+    --tarjeta: #fffffe;
+
+    --headline: #094067;
+    --paragraph: #5f6c7b;
+
+    --button: #3da9fc;
+    --accent: #ef4565;
+}
+
+body{
+    background-color: var(--background);
+    font-family: 'Muli', sans-serif;
+    color: var(--headline);
+}
+h2{
+    text-align: center;
+    margin-top: -2rem;
+    font-weight: 700;
+}
+
+label{
+    font-weight: 600;
+}
+
+.btn-primary{
+	background-color: var(--accent) !important;
+	border: 0px !important;
+}

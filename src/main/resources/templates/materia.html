@@ -5,19 +5,24 @@
 
 <meta charset="ISO-8859-1">
 <title>Nueva Materia</title>
+<!--CUSTOM CSS-->
+	<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../styles/usuarios/usuario.css">
 </head>
 <body>
-	<form th:action="@{/formMateria}" method="post" th:object="${materia}">
+	<div class="container d-flex flex-column justify-content-center">
+		<h2 class="mt-5">Nueva Materia.</h2>
+		<form th:action="@{/formMateria}" method="post" th:object="${materia}">
 	
-		
 		<div class="form-group">
-			<label for="inputNombre">Nombre</label>
+			<label for="inputNombre">Nombre de la Materia</label>
 			<input type="text" class="form-control" id="inputNombre" th:field="${materia.MateriaName}">
 		</div>
 		
-		<button class="btn btn-primary" type="submit">Submit form</button>
+		<button class="btn btn-primary" type="submit">Crear</button>
 	</form>
-
-
+	</div>
+	
+	
 </body>
 </html>
