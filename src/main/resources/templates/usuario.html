@@ -1,101 +1,168 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Nuevo Usuario</title>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Nuevo Usuario</title>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-	<form th:action="@{/formUsuario}" method="post" th:object="${user}">
-		
-		<div  class="form row">
-			
-		
-			<div class="form-group col-md-6">
-			 	<label for="inputNombre">Nombre</label>
-			 	<input type="text" class="form-control" id="inputNombre" th:field="${user.nombre}">
-			</div>
-			
-			<div class="form-group col-md-6">
-      			<label for="inputApellido"  >Apellido</label>
-     		 	<input type="text" class="form-control" id="inputApellido" th:field="${user.apellido}">
-    		</div>
-    		
-    		<div class="form-group col-md-6">
-      			<label for="inputEdad">Edad</label>
-     		 	<input type="number" class="form-control" id="inputEdad" th:field="${user.edad}">
-    		</div>
-    		
-    		<div class="form-group col-md-6">
-      			<label for="inputFechas">Fecha de nacimiento</label>
-     		 	<input type="date" class="form-control" id="inputFechas" placeholder="DD/MM/AAAA" th:field="${user.birthdayDate}">
-    		</div>
-    		
-		</div>
-		<div class="form-group">
-			<label for="inputUsername">Username</label>
-    		<input type="text" class="form-control" id="inputUsername" th:field="${user.username}">
-		</div>
-		
-		<div class="form-group">
-			<label for="inputPassword">Password</label>
-    		<input type="text" class="form-control" id="inputPassword" th:value="${user.passwordEncripted}" name="passwordEncripted">
-		</div>
-		
-		<div class="form-group">
-			<label for="inputDir">Direccion</label>
-    		<input type="text" class="form-control" id="inputDir" th:field="${user.direccion}">
-		</div>
+    <link
+      href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+      id="bootstrap-css"
+    />
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
-  		
-  		<div class="form-group">
-			<label for="inputCentro">CentroEscolar</label>
-			<select id="inputCentro" class="form-control" th:field="*{centroEscolar.centroEscolarID}">
-				<option th:each="cen : ${centros}"
-						th:value=${cen.centroEscolarID}
-						th:text="${cen.CentroEscolarName}"/>
-			</select>
-		</div>
-		
-		<div class="form-group">
-			<label for="inputDepa">Departamento</label>
-			<select id="inputDepa" class="form-control" th:field="*{municipio.departamento.departamentoID}">
-				<option th:each="depa : ${departamentos}"
-						th:value=${depa.departamentoID}
-						th:text="${depa.departamentoName}"/>
-			</select>
-		</div>
-		
-		
-		<div class="form-group">
-			<label for="inputMuni">Municipio</label>
-			<select id="inputMuni" class="form-control" th:field="*{municipio.municipioID}">
-				<option th:each="muni : ${municipios}"
-						th:value=${muni.municipioID}
-						th:text="${muni.municipioName}"/>
-			</select>
-		</div>
-  		
-  		<div class="form-group">
-			<label for="inputRol">Rol</label>
-			<select id="inputRol" class="form-control" th:field="*{rol.rolID}">
-				<option th:each="r : ${roles}"
-						th:value=${r.rolID}
-						th:text="${r.rolName}"/>
-			</select>
-		</div>
-  		
-  		<div class="custom-control custom-checkbox mb-3">
-    		<input type="checkbox" class="custom-control-input" id="customControlValidation1" th:field="${user.Estado}">
-    		<label class="custom-control-label" for="customControlValidation1">Activo</label>
-   
-  		</div>
-  		
-  		<button class="btn btn-primary" type="submit">Submit form</button>
-	</form>
-	
-</body>
+	<!--CUSTOM CSS-->
+	<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../styles/usuarios/usuario.css">
+  </head>
+  <body>
+    <div class="container p-5">
+		<h2>Editar Usuario.</h2>
+		<form th:action="@{/formUsuario}" method="post" th:object="${user}">
+        <div class="form row">
+          <div class="form-group col-md-6">
+            <label for="inputNombre">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputNombre"
+              th:field="${user.nombre}"
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputApellido">Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputApellido"
+              th:field="${user.apellido}"
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputEdad">Edad</label>
+            <input
+              type="number"
+              class="form-control"
+              id="inputEdad"
+              th:field="${user.edad}"
+            />
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputFechas">Fecha de nacimiento</label>
+            <input
+              type="date"
+              class="form-control"
+              id="inputFechas"
+              placeholder="DD/MM/AAAA"
+              th:field="${user.birthdayDate}"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputUsername">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputUsername"
+            th:field="${user.username}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword"
+            th:value="${user.passwordEncripted}"
+            name="passwordEncripted"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inputDir">Direccion</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputDir"
+            th:field="${user.direccion}"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="inputCentro">CentroEscolar</label>
+          <select
+            id="inputCentro"
+            class="form-control"
+            th:field="*{centroEscolar.centroEscolarID}"
+          >
+            <option
+              th:each="cen : ${centros}"
+              th:value="${cen.centroEscolarID}"
+              th:text="${cen.CentroEscolarName}"
+            />
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputDepa">Departamento</label>
+          <select
+            id="inputDepa"
+            class="form-control"
+            th:field="*{municipio.departamento.departamentoID}"
+          >
+            <option
+              th:each="depa : ${departamentos}"
+              th:value="${depa.departamentoID}"
+              th:text="${depa.departamentoName}"
+            />
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputMuni">Municipio</label>
+          <select
+            id="inputMuni"
+            class="form-control"
+            th:field="*{municipio.municipioID}"
+          >
+            <option
+              th:each="muni : ${municipios}"
+              th:value="${muni.municipioID}"
+              th:text="${muni.municipioName}"
+            />
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="inputRol">Rol</label>
+          <select id="inputRol" class="form-control" th:field="*{rol.rolID}">
+            <option
+              th:each="r : ${roles}"
+              th:value="${r.rolID}"
+              th:text="${r.rolName}"
+            />
+          </select>
+        </div>
+
+        <div class="custom-control custom-checkbox mb-3">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customControlValidation1"
+            th:field="${user.Estado}"
+          />
+          <label class="custom-control-label" for="customControlValidation1"
+            >Activo</label
+          >
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit form</button>
+      </form>
+    </div>
+  </body>
 </html>
