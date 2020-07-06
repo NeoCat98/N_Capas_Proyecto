@@ -9,7 +9,7 @@ import com.uca.capas.domain.MateriaXAlumnoKey;
 
 public interface MateriaXAlumnoDAO {
 	public List<MateriaXAlumno> findAll() throws DataAccessException;
-	public MateriaXAlumno findOne(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException;
-	public void insert(MateriaXAlumno materiaXAlumno) throws DataAccessException;
-	public void delete(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException;
+	public MateriaXAlumno findOne(Integer id) throws DataAccessException;
+	public void insert(MateriaXAlumno mxa) throws DataAccessException;
+	public void delete(Integer id) throws DataAccessException;
 }

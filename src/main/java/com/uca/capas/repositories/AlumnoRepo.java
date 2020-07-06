@@ -14,7 +14,7 @@ public interface AlumnoRepo extends JpaRepository<Alumno, Integer> {
 
 	
 	
-	@Query(nativeQuery=true, value="select m.materianame,n.nota, n.anno,n.ciclo,n.resultado from materia m, alumno a, materiaxalumno n where  m.materiaid= n.materiaid and n.alumnoid = a.alumnoid and a.alumnoid=:id")
+	@Query(nativeQuery=true, value="select n.id,m.materianame, n.anno,n.ciclo,n.nota,n.resultado from materia m, alumno a, materiaxalumno n where  m.materiaid= n.materiaid and n.alumnoid = a.alumnoid and a.alumnoid= ?1")
 	public List<Object[]> obtenerMateriasCursadas(int id) throws DataAccessException;
 	
 	@Query(nativeQuery=true,value="select a.alumnoid,a.firstname,a.lastname,coalesce(sub.aprobadas,0) as aprobadas ,coalesce(sub.reprobadas,0) as reprobadas,coalesce(sub.Promedio,0) as promedio " + 

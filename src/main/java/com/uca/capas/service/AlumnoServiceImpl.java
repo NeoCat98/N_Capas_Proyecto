@@ -50,11 +50,12 @@ public class AlumnoServiceImpl implements AlumnoService{
 		
 		List<AlumnoDTO> alumnos = alumnoRepo.obtenerMateriasCursadas(id).stream().map(obj->{
 					AlumnoDTO e = new AlumnoDTO();
-					e.setMateria(obj[0].toString());
-					e.setNota(obj[1].toString());
+					e.setid(Integer.parseInt(obj[0].toString()));
+					e.setMateria(obj[1].toString());
 					e.setAnio(Integer.parseInt(obj[2].toString()));
 					e.setCiclo(Integer.parseInt(obj[3].toString()));
-					e.setResultado(Boolean.valueOf(obj[4].toString()));
+					e.setNota(obj[4].toString());
+					e.setResultado(Boolean.valueOf(obj[5].toString()));
 					return e;
 		}).collect(Collectors.toList());
 		

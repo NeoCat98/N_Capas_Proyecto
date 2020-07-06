@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<meta charset="ISO-8859-1">
+<title>Editar Materia Cursada</title>
+</head>
+<body>
+
+	<form th:action="@{/formMateriaCursada}" method="post" th:object="${mxa}">
+	
+		<input type="hidden" th:field="${mxa.id}">
+		
+		<input type="hidden" class="form-control" id="inputAl" th:field="*{alumno.alumnoID}">
+	
+		<div class="form-group">
+			<label for="inputMuni">Materia</label>
+			<select id="inputMuni" class="form-control" th:field="*{materia.materiaID}">
+				<option th:each="mate : ${materias}"
+						th:value=${mate.materiaID}
+						th:text="${mate.materiaName}"/>
+			</select>
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputApellido">Anio: </label>
+		 	<input type="text" class="form-control" id="inputApellido" th:field="${mxa.anno}">
+		</div>
+		
+		<div class="form-group col-md-6">
+		 	<label for="inputCarnet">Ciclo: </label>
+		 	<input type="text" class="form-control" id="inputCarnet" th:field="${mxa.ciclo}">
+		</div>
+		<div class="form-group col-md-6">
+		 	<label for="inputFecha">Nota: </label>
+		 	<input type="text" class="form-control" id="inputFecha" th:field="${mxa.nota}">
+		</div>
+		
+		<input type="hidden" class="form-control" id="inputFecha" th:field="${mxa.resultado}">
+		
+		
+		
+		
+		
+		<input type="Submit" value="Enviar form" class="btn btn-primary">
+	</form>
+
+</body>
+</html>

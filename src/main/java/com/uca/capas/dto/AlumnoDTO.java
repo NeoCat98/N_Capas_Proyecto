@@ -1,6 +1,8 @@
 package com.uca.capas.dto;
 
 public class AlumnoDTO {
+	
+	Integer id;
 
 	String materia;
 	
@@ -15,6 +17,14 @@ public class AlumnoDTO {
 	
 	
 	
+	public Integer getid() {
+		return id;
+	}
+
+	public void setid(Integer id) {
+		this.id = id;
+	}
+
 	public String getMateria() {
 		return materia;
 	}

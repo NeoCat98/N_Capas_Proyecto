@@ -22,18 +22,18 @@ public class MateriaXAlumnoServiceImpl implements MateriaXAlumnoService{
 	}
 
 	@Override
-	public MateriaXAlumno findOne(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		return materiaXAlumnoRepo.getOne(materiaXAlumnoKey);
+	public MateriaXAlumno findOne(Integer id) throws DataAccessException {
+		return materiaXAlumnoRepo.getOne(id);
 	}
 
 	@Override
-	public void insert(MateriaXAlumno materiaXAlumno) throws DataAccessException {
-		materiaXAlumnoRepo.save(materiaXAlumno);
+	public void insert(MateriaXAlumno mxa) throws DataAccessException {
+		materiaXAlumnoRepo.save(mxa);
 	}
 
 	@Override
-	public void delete(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		materiaXAlumnoRepo.deleteById(materiaXAlumnoKey);
+	public void delete(Integer id) throws DataAccessException {
+		materiaXAlumnoRepo.deleteById(id);
 	}
 
 }

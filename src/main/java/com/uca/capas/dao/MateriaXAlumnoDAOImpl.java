@@ -29,20 +29,20 @@ public class MateriaXAlumnoDAOImpl implements MateriaXAlumnoDAO{
 	}
 
 	@Override
-	public MateriaXAlumno findOne(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		return entityManager.find(MateriaXAlumno.class, materiaXAlumnoKey);
+	public MateriaXAlumno findOne(Integer id) throws DataAccessException {
+		return entityManager.find(MateriaXAlumno.class, id);
 	}
 	
 	@Transactional
 	@Override
-	public void insert(MateriaXAlumno materiaXAlumno) throws DataAccessException {
-		entityManager.persist(materiaXAlumno);
+	public void insert(MateriaXAlumno mxa) throws DataAccessException {
+		entityManager.persist(mxa);
 	}
 
 	@Transactional
 	@Override
-	public void delete(MateriaXAlumnoKey materiaXAlumnoKey) throws DataAccessException {
-		MateriaXAlumno materiaXAlumno = entityManager.find(MateriaXAlumno.class, materiaXAlumnoKey);
+	public void delete(Integer id) throws DataAccessException {
+		MateriaXAlumno materiaXAlumno = entityManager.find(MateriaXAlumno.class, id);
 		entityManager.remove(materiaXAlumno);
 	}
 

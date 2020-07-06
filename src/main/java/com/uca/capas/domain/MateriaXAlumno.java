@@ -3,55 +3,101 @@ package com.uca.capas.domain;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(schema="public",name="MateriaXAlumno")
 public class MateriaXAlumno {
-	 @EmbeddedId
-	 MateriaXAlumnoKey id = new MateriaXAlumnoKey();
+	
+	
+	
+	 @Id
+	 @Column(name="id")
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	 private Integer id;
+	
+
 	 
-	 @ManyToOne
-	 @MapsId("AlumnoID")
+	 @ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(name = "AlumnoID")
 	 Alumno alumno;
 	 
-	 @ManyToOne
-	 @MapsId("MateriaID")
+	@Transient
+	private Integer alumnoFK;
+	 
+	
+	 @ManyToOne(fetch = FetchType.LAZY)
+	 //@MapsId("MateriaID")
 	 @JoinColumn(name = "MateriaID")
 	 Materia materia;
 	 
+	@Transient
+	private Integer materiaFK;
+	
+	 
 	 @Column(name="Anno")
-	 @NotEmpty(message="Este campo no puede estar vacio")
-	 private String anno;
+	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 private Integer anno;
 	 
 	 @Column(name="Ciclo")
-	 @NotEmpty(message="Este campo no puede estar vacio")
-	 private String ciclo;
+	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 private Integer ciclo;
 	 
 	 @Column(name="Nota")
-	 @NotEmpty(message="Este campo no puede estar vacio")
+	// @NotEmpty(message="Este campo no puede estar vacio")
 	 private float nota;
 	 
 	 @Column(name="Resultado")
-	 @NotEmpty(message="Este campo no puede estar vacio")
-	 private String resultado;
+	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 private Boolean resultado;
 	 
-	 MateriaXAlumno(){
+	 public MateriaXAlumno(){
 		 
 	 }
 
-	public MateriaXAlumnoKey getId() {
-		return id;
+	/* public MateriaXAlumnoKey getIdraro() {
+		 return idraro;
+	 }
+
+	 public void setIdraro(MateriaXAlumnoKey idraro) {
+		 this.idraro = idraro;
+	 }*/
+	 
+	 public Integer getId() {
+		 return id;
+	 }
+
+	
+
+	public Integer getAlumnoFK() {
+		return alumnoFK;
 	}
 
-	public void setId(MateriaXAlumnoKey id) {
+	public void setAlumnoFK(Integer alumnoFK) {
+		this.alumnoFK = alumnoFK;
+	}
+
+	public Integer getMateriaFK() {
+		return materiaFK;
+	}
+
+	public void setMateriaFK(Integer materiaFK) {
+		this.materiaFK = materiaFK;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public Alumno getAlumno() {
 		return alumno;
@@ -69,19 +115,19 @@ public class MateriaXAlumno {
 		this.materia = materia;
 	}
 
-	public String getAnno() {
+	public Integer getAnno() {
 		return anno;
 	}
 
-	public void setAnno(String anno) {
+	public void setAnno(Integer anno) {
 		this.anno = anno;
 	}
 
-	public String getCiclo() {
+	public Integer getCiclo() {
 		return ciclo;
 	}
 
-	public void setCiclo(String ciclo) {
+	public void setCiclo(Integer ciclo) {
 		this.ciclo = ciclo;
 	}
 
@@ -93,11 +139,11 @@ public class MateriaXAlumno {
 		this.nota = nota;
 	}
 
-	public String getResultado() {
+	public Boolean getResultado() {
 		return resultado;
 	}
 
-	public void setResultado(String resultado) {
+	public void setResultado(Boolean resultado) {
 		this.resultado = resultado;
 	}
 	 
