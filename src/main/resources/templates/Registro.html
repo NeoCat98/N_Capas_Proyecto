@@ -2,99 +2,115 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>Registro</title>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="../styles/usuarios/usuarios.css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
-	<form th:action="@{/formRegistro}" method="post" th:object="${user}">
-		
-		<div  class="form row">
-		
-			<div class="form-group col-md-6">
-			 	<label for="inputNombre">Nombre</label>
-			 	<input type="text" class="form-control" id="inputNombre" th:field="${user.nombre}">
+	<div class="container">
+		<h1 class="mt-2">Registro.</h1>
+		<br>
+		<form th:action="@{/formRegistro}" method="post" th:object="${user}">
+
+			<div class="form row">
+
+				<div class="form-group col-md-6">
+					<label for="inputNombre">Nombre</label> <input type="text"
+						class="form-control" id="inputNombre" th:field="${user.nombre}">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="inputApellido">Apellido</label> <input type="text"
+						class="form-control" id="inputApellido"
+						th:field="${user.apellido}">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="inputEdad">Edad</label> <input type="number"
+						class="form-control" id="inputEdad" th:field="${user.edad}">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="inputFechas">Fecha de nacimiento</label> <input
+						type="date" class="form-control" id="inputFechas"
+						placeholder="DD/MM/AAAA" th:field="${user.birthdayDate}">
+				</div>
+
+			</div>
+			<div class="form-group">
+				<label for="inputUsername">Username</label> <input type="text"
+					class="form-control" id="inputUsername" th:field="${user.username}">
+			</div>
+
+			<div class="form-group">
+				<label for="inputPassword">Password</label> <input type="password"
+					class="form-control" id="inputPassword"
+					th:field="${user.passwordEncripted}">
+			</div>
+
+			<div class="form-group">
+				<label for="inputDir">Direccion</label> <input type="text"
+					class="form-control" id="inputDir" th:field="${user.direccion}">
+			</div>
+
+
+			<div class="form-group">
+				<label for="inputCentro">CentroEscolar</label> <select
+					id="inputCentro" class="form-control"
+					th:field="*{centroEscolar.centroEscolarID}">
+					<option th:each="cen : ${centros}" th:value=${cen.centroEscolarID}
+						th:text="${cen.CentroEscolarName}" />
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="inputDepa">Departamento</label> <select id="inputDepa"
+					class="form-control" th:field="*{municipio.departamento}">
+					<option th:each="muni : ${municipios}"
+						th:value=${muni.departamento.departamentoID}
+						th:text="${muni.departamento.departamentoName}" />
+				</select>
+			</div>
+
+
+			<div class="form-group">
+				<label for="inputMuni">Municipio</label> <select id="inputMuni"
+					class="form-control" th:field="*{municipio.municipioID}">
+					<option th:each="muni : ${municipios}" th:value=${muni.municipioID}
+						th:text="${muni.municipioName}" />
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="inputRol">Rol</label> <select id="inputRol"
+					class="form-control" th:field="*{rol.rolID}">
+					<option th:each="r : ${roles}" th:value=${r.rolID}
+						th:text="${r.rolName}" />
+				</select>
+			</div>
+
+			<div class="custom-control custom-checkbox mb-3">
+				<input type="checkbox" class="custom-control-input"
+					id="customControlValidation1" th:field="${user.Estado}"> <label
+					class="custom-control-label" for="customControlValidation1">Activo</label>
+
 			</div>
 			
-			<div class="form-group col-md-6">
-      			<label for="inputApellido"  >Apellido</label>
-     		 	<input type="text" class="form-control" id="inputApellido" th:field="${user.apellido}">
-    		</div>
-    		
-    		<div class="form-group col-md-6">
-      			<label for="inputEdad">Edad</label>
-     		 	<input type="number" class="form-control" id="inputEdad" th:field="${user.edad}">
-    		</div>
-    		
-    		<div class="form-group col-md-6">
-      			<label for="inputFechas">Fecha de nacimiento</label>
-     		 	<input type="date" class="form-control" id="inputFechas" placeholder="DD/MM/AAAA" th:field="${user.birthdayDate}">
-    		</div>
-    		
-		</div>
-		<div class="form-group">
-			<label for="inputUsername">Username</label>
-    		<input type="text" class="form-control" id="inputUsername" th:field="${user.username}">
-		</div>
-		
-		<div class="form-group">
-			<label for="inputPassword">Password</label>
-    		<input type="password" class="form-control" id="inputPassword" th:field="${user.passwordEncripted}">
-		</div>
-		
-		<div class="form-group">
-			<label for="inputDir">Direccion</label>
-    		<input type="text" class="form-control" id="inputDir" th:field="${user.direccion}">
-		</div>
-	
-  		
-  		<div class="form-group">
-			<label for="inputCentro">CentroEscolar</label>
-			<select id="inputCentro" class="form-control" th:field="*{centroEscolar.centroEscolarID}">
-				<option th:each="cen : ${centros}"
-						th:value=${cen.centroEscolarID}
-						th:text="${cen.CentroEscolarName}"/>
-			</select>
-		</div>
-		
-		<div class="form-group">
-			<label for="inputDepa">Departamento</label>
-			<select id="inputDepa" class="form-control" th:field="*{municipio.departamento}">
-				<option th:each="muni : ${municipios}"
-						th:value=${muni.departamento.departamentoID}
-						th:text="${muni.departamento.departamentoName}"/>
-			</select>
-		</div>
-		
-		
-		<div class="form-group">
-			<label for="inputMuni">Municipio</label>
-			<select id="inputMuni" class="form-control" th:field="*{municipio.municipioID}">
-				<option th:each="muni : ${municipios}"
-						th:value=${muni.municipioID}
-						th:text="${muni.municipioName}"/>
-			</select>
-		</div>
-  		
-  		<div class="form-group">
-			<label for="inputRol">Rol</label>
-			<select id="inputRol" class="form-control" th:field="*{rol.rolID}">
-				<option th:each="r : ${roles}"
-						th:value=${r.rolID}
-						th:text="${r.rolName}"/>
-			</select>
-		</div>
-  		
-  		<div class="custom-control custom-checkbox mb-3">
-    		<input type="checkbox" class="custom-control-input" id="customControlValidation1" th:field="${user.Estado}">
-    		<label class="custom-control-label" for="customControlValidation1">Activo</label>
-   
-  		</div>
-  		
-  		<button class="btn btn-primary" type="submit">Submit form</button>
-	</form>
+			<div class="d-flex">
+			<button class="btn btn-primary" type="submit">Registrar</button>
+			<a href="/IniciarSesion" class="btn btn-warning boton-regresar">Login</a>
+			</div>
+			
+		</form>
+	</div>
+
 
 </body>
 </html>

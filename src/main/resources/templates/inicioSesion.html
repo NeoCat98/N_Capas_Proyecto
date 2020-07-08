@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
 
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Iniciar Sesion</title>
+<link rel="stylesheet" href="../styles/usuarios/usuarios.css">
 </head>
 <body>
 
 
-	<div class="card text-center">
-		<div class="card-header">
-	    	Iniciar Sesion
-	  	</div>
-	  	<div class="card-body">
-	    	<form th:action="@{/formIniciarSesion}" method="post">
-		      <input type="text" id="user" class="form-control" name="user"placeholder="username">
-		      <input type="password" id="pass" class="form-control" name="pass"  placeholder="password">
-		      <span th:field="${error}"></span>
-		      <input type="submit" class="btn btn-primary" value="inicioSesion">
-		    </form>
-	  	</div>
-	  		<form th:action="@{/registrar}">
-	  			<input type="submit" class="btn btn-primary" value="Registrar">
-	  		</form>
-	
+	<div class="container">
+		<div class="d-flex flex-column justify-content-center">
+			<br>
+			<div class="card text-center">
+				<div class="card-header">Iniciar Sesion</div>
+				<div class="card-body">
+					<form th:action="@{/formIniciarSesion}" method="post">
+						<input type="text" id="user" class="form-control" name="user"
+							placeholder="Username"><br> <input type="password" id="pass"
+							class="form-control" name="pass" placeholder="Password">
+						<br>
+						<span th:field="${error}"></span> <input type="submit"
+							class="btn btn-block btn-primary" value="Iniciar Sesion">
+					</form>
+					<form th:action="@{/registrar}">
+					<input type="submit" class="mt-2 btn btn-block btn-success" value="Registrar">
+					</form>
+				</div>
+				
+
+			</div>
+			<br>
+		</div>
+
 	</div>
+	<br>
+
 </body>
 </html>
