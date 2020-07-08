@@ -28,3 +28,8 @@ label{
 	background-color: var(--accent) !important;
 	border: 0px !important;
 }
+
+.boton-regresar{
+	margin-left : 1rem;
+	color: var(--tarjeta) !important;
+}
