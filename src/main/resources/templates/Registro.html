@@ -72,10 +72,10 @@
 
 			<div class="form-group">
 				<label for="inputDepa">Departamento</label> <select id="inputDepa"
-					class="form-control" th:field="*{municipio.departamento}">
-					<option th:each="muni : ${municipios}"
-						th:value=${muni.departamento.departamentoID}
-						th:text="${muni.departamento.departamentoName}" />
+					class="form-control" th:field="*{municipio.departamento.departamentoID}">
+					<option th:each="depar : ${departamentos}"
+						th:value=${depar.departamentoID}
+						th:text="${depar.departamentoName}" />
 				</select>
 			</div>
 
