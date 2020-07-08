@@ -4,56 +4,62 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 <title>Nuevo Expediente</title>
+
+<link rel="stylesheet" href="../styles/usuarios/usuarios.css">
+
 </head>
 <body>
 
-	<form th:action="@{/formExpediente}" method="post" th:object="${alumno}">
+	<div class="container">
+		<h1 class="mt-5">Crear Expediente.</h1>
+		
+		<form th:action="@{/formExpediente}" method="post" th:object="${alumno}">
 	
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputNombre">Nombres: </label>
 		 	<input type="text" class="form-control" id="inputNombre" th:field="${alumno.firstName}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputApellido">Apellidos: </label>
 		 	<input type="text" class="form-control" id="inputApellido" th:field="${alumno.lastName}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputCarnet">Carnet: </label>
 		 	<input type="text" class="form-control" id="inputCarnet" th:field="${alumno.carnet}">
 		</div>
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputFecha">Fecha de nacimiento: </label>
 		 	<input type="date" class="form-control" id="inputFecha" th:field="${alumno.birthdayDate}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputFecha">Edad: </label>
 		 	<input type="number" class="form-control" id="inputFecha" th:field="${alumno.edad}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputDir">Direccion: </label>
 		 	<input type="text" class="form-control" id="inputDir" th:field="${alumno.direccion}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputF">Telefono Fijo: </label>
 		 	<input type="text" class="form-control" id="inputF" th:field="${alumno.telefonoFijo}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputTM">Telefono Movil: </label>
 		 	<input type="text" class="form-control" id="inputTM" th:field="${alumno.telefonoMovil}">
 		</div>
-		
-		<div class="form-group col-md-6">
+	
+		<div class="form-group">
 		 	<label for="inputNP">Nombre padre: </label>
 		 	<input type="text" class="form-control" id="inputNP" th:field="${alumno.padre}">
 		</div>
 		
-		<div class="form-group col-md-6">
+		<div class="form-group">
 		 	<label for="inputNM">Nombre madre: </label>
 		 	<input type="text" class="form-control" id="inputNM" th:field="${alumno.madre}">
 		</div>
@@ -76,8 +82,14 @@
 			</select>
 		</div>
 		
-		<input type="Submit" value="Enviar form" class="btn btn-primary">
+		<div class="d-flex mb-4">
+			<input type="Submit" value="Crear Expediente" class="btn btn-primary">
+			<a href="/coordinadorIndex" class="btn btn-warning boton-regresar">Regresar</a>
+		</div>
+		
 	</form>
+	</div>
+	
 
 </body>
 </html>

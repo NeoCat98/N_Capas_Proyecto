@@ -28,3 +28,11 @@ h1{
 	text-align: center;
 	font-weight: 700;
 }
+
+.boton-regresar{
+	margin-left : 1rem;
+	color: var(--tarjeta) !important;
+}
+.boton-regresar-first{
+	color: var(--tarjeta) !important;
+}

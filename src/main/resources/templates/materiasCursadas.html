@@ -2,12 +2,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Materias Cursadas</title>
 
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<link rel="stylesheet" href="../styles/usuarios/usuarios.css">
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
 
 
@@ -16,57 +25,79 @@
 
 
 <body>
-	
-	<input type="hidden" th:value="${alumnoid}" id="id" name="id">
-	
-	<script>
-		var a=(document).getElementById('id').value;
+
+	<div class="container">
+		<input type="hidden" th:value="${alumnoid}" id="id" name="id">
+
+		<script>
+			var a = (document).getElementById('id').value;
+
+			$(document)
+					.ready(
+							function() {
+
+								var table = $('#tabla')
+										.DataTable(
+												{
+													"ordering" : false,
+													"processing" : true,
+													"serverSide" : true,
+													"ajax" : './cargaMaterias?alumnoid='
+															+ a,
+													"language" : {
+														"url" : "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+													},
+													"paging" : false,
+													"info" : false,
+													"searching" : false,
+													"columnDefs" : [ {
+														"targets" : 0,
+														"data" : null,
+														"searchable" : false,
+														"defaultContent" : "<button class='btn btn-info' title='Editar' id='i'><i class='fa fa-pencil-alt'></i></button>"
+													} ]
+												});
+								$('#tabla tbody')
+										.on(
+												'click',
+												'#i',
+												function() {
+													var data = table.row(
+															$(this).parents(
+																	'tr'))
+															.data();
+													location.href = './editarMateriaCursada?id='
+															+ data[0];
+												});
+							});
+		</script>
+
+		<div class="d-flex">
+			<form th:action="@{/NuevaMateriaCursada}" method="post">
+				<input class="mt-5 mb-3 btn btn-primary" type="submit"
+					value="+ Agregar nueva materia">
+			</form>
+		</div>
+
+
+		<table id="tabla" class="table table-striped tabla">
+			<thead>
+				<tr>
+					<th scope="col">Accion</th>
+					<th scope="col">Materia</th>
+					<th scope="col">Año</th>
+					<th scope="col">Ciclo</th>
+					<th scope="col">Nota</th>
+					<th scope="col">Resultado</th>
+				</tr>
+			</thead>
+		</table>
 		
-		$(document).ready(function(){
-			
-		    var table = $('#tabla').DataTable( {
-		        "ordering": false,
-		        "processing": true,
-		        "serverSide": true,
-		        "ajax": './cargaMaterias?alumnoid='+a,
-		        "language": {
-		            "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
-		        },
-		        "paging": false,
-		        "info": false,
-		        "searching": false,
-		        "columnDefs": [ {
-		            "targets": 0,
-		            "data": null,
-		            "searchable": false,
-		            "defaultContent": "<button class='btn btn-info' title='Editar' id='i'><i class='fa fa-pencil-alt'></i></button>"
-		        }]
-		    });
-		    $('#tabla tbody').on( 'click', '#i', function () {
-		        var data = table.row( $(this).parents('tr') ).data();
-		            location.href = './editarMateriaCursada?id=' + data[0];
-		    } );
-		});
-		
-	</script>
-	
-	<form th:action="@{/NuevaMateriaCursada}" method="post">
-		<input type="submit" value="+ Agregar nueva materia">
-	</form>
-	
-	<table id="tabla" class="table table-striped">
-  		<thead>
-		    <tr>
-		      <th scope="col">Accion</th>
-		      <th scope="col">Materia</th>
-		      <th scope="col">Año</th>
-		      <th scope="col">Ciclo</th>
-		      <th scope="col">Nota</th>
-		      <th scope="col">Resultado</th>
-		    </tr>
-  		</thead>
-	</table>
-	
-	
+		<a href="/expedientes" class="mt-2 btn btn-warning boton-regresar-first">Regresar</a>
+	</div>
+
+
+
+
 </body>
 </html>
