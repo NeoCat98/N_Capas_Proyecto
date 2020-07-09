@@ -1,7 +1,5 @@
 package com.uca.capas.domain;
 
-import com.uca.capas.config.Encriptar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -55,16 +56,17 @@ public class UserAdmin {
 	private String apellido;
 	
 	@Column(name="BirthdayDate")
-	//@NotEmpty(message="Este campo no puede estar vacio")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message="Este campo no puede estar vacio")
 	private Date birthdayDate;
 	
 	@Column(name="Edad")
+	@NotNull(message="Este campo no puede estar vacio")
 	private int edad;
 	
 	@Column(name="Username")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String username;
-	
 
 	@Column(name="Direccion")
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -75,6 +77,7 @@ public class UserAdmin {
 	private String passwordEncripted;
 	
 	@Column(name="Estado")
+	@NotNull(message="Este campo no puede estar vacio")
 	private Boolean Estado;
 
 	public Integer getUserAdminID() {

@@ -8,6 +8,8 @@
 
 <meta charset="ISO-8859-1">
 <title>Nuevo Centro Escolar</title>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="../js/ejemplo.js"></script> 
 <!--CUSTOM CSS-->
 <link
@@ -18,17 +20,19 @@
 <body>
 	<div class="container p-5">
 		<h2>Nuevo Centro Escolar.</h2>
-		<form th:action="@{/formCentro}" method="post" th:object="${centro}">
+		<form th:action="@{/formNuevoCentro}" method="post" th:object="${centroEscolar}">
 
 			<div class="form-group">
 				<label for="inputNombre">Nombre</label> <input type="text"
 					class="form-control" id="inputNombre"
-					th:field="${centro.CentroEscolarName}">
+					th:field="${centroEscolar.CentroEscolarName}">
+					<span th:errors="*{CentroEscolarName}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputDir">Direccion</label> <input type="text"
-					class="form-control" id="inputDir" th:field="${centro.direccion}">
+					class="form-control" id="inputDir" th:field="*{direccion}">
+				<span th:errors="*{direccion}" style="color: #FF0000"></span>
 			</div>
 
 
@@ -42,7 +46,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="inputMun">Municipio</label> <select id="inputMun"
+				<label for="inputMuni">Municipio</label> <select id="inputMuni"
 					class="form-control" th:field="*{municipio.municipioID}">
 					<option th:each="muni : ${municipios}" th:value=${muni.municipioID}
 						th:text="${muni.municipioName}" />

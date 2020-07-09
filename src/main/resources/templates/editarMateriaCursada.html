@@ -17,12 +17,11 @@
 		<br>
 		<h1>Editar Materia Cursada.</h1>
 		<form th:action="@{/formMateriaCursada}" method="post"
-			th:object="${mxa}">
+			th:object="${materiaXAlumno}">
 
-			<input type="hidden" th:field="${mxa.id}"> <input
+			<input type="hidden" th:field="${materiaXAlumno.id}"> <input
 				type="hidden" class="form-control" id="inputAl"
 				th:field="*{alumno.alumnoID}">
-
 			<div class="form-group">
 				<label for="inputMuni">Materia</label> <select id="inputMuni"
 					class="form-control" th:field="*{materia.materiaID}">
@@ -33,20 +32,23 @@
 
 			<div class="form-group">
 				<label for="inputApellido">Anio: </label> <input type="text"
-					class="form-control" id="inputApellido" th:field="${mxa.anno}">
+					class="form-control" id="inputApellido" th:field="*{anno}">
+					<span th:errors="*{anno}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputCarnet">Ciclo: </label> <input type="text"
-					class="form-control" id="inputCarnet" th:field="${mxa.ciclo}">
+					class="form-control" id="inputCarnet" th:field="*{ciclo}">
+					<span th:errors="*{ciclo}" style="color: #FF0000"></span>
 			</div>
 			<div class="form-group">
 				<label for="inputFecha">Nota: </label> <input type="text"
-					class="form-control" id="inputFecha" th:field="${mxa.nota}">
+					class="form-control" id="inputFecha" th:field="*{nota}">
+					<span th:errors="*{nota}" style="color: #FF0000"></span>
 			</div>
 
 			<input type="hidden" class="form-control" id="inputFecha"
-				th:field="${mxa.resultado}"> <input type="Submit"
+				th:field="*{resultado}"> <input type="Submit"
 				value="Actualizar" class="btn btn-primary">
 		</form>
 		<br>

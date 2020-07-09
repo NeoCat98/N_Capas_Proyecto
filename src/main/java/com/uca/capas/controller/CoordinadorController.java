@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,15 +66,8 @@ public class CoordinadorController {
 	public ModelAndView nuevoExpediente() {
 		ModelAndView mav = new ModelAndView();
 		Alumno alumno = new Alumno();
-		List<Municipio> municipios = null;
-		List<CentroEscolar> centros = null;
-		
-		
-		municipios= municipioService.findAll();
-		centros=centroService.findAll();
-		
-		mav.addObject("municipios",municipios);
-		mav.addObject("centros",centros);
+		mav.addObject("municipios",municipioService.findAll());
+		mav.addObject("centros",centroService.findAll());
 		mav.addObject("alumno",alumno);
 		mav.setViewName("nuevoExpediente");
 		return mav;
@@ -80,20 +76,24 @@ public class CoordinadorController {
 	
 
 	@RequestMapping("/formExpediente")
-	public ModelAndView formExpediente(@ModelAttribute Alumno alumno) {
+	public ModelAndView formExpediente(@Valid @ModelAttribute Alumno alumno, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		
-		alumnoService.insert(alumno);
-		
-		mav.setViewName("co-buscador");
+		if(result.hasErrors()) {
+			mav.addObject("municipios",municipioService.findAll());
+			mav.addObject("centros",centroService.findAll());
+			mav.addObject("alumno",alumno);
+			mav.setViewName("nuevoExpediente");
+		}
+		else {
+			alumnoService.insert(alumno);
+			mav.setViewName("co-buscador");
+		}
 		return mav;
 	}
 	
 	@RequestMapping("/expedientes")
 	public ModelAndView usuario(@RequestParam String tipoBusqueda, @RequestParam String valorAlumno) {
 		ModelAndView mav = new ModelAndView();
-		
-
 		mav.addObject("tipoBusqueda",tipoBusqueda);
 		mav.addObject("valorAlumno",valorAlumno);
 		mav.setViewName("expedientes");
@@ -127,20 +127,30 @@ public class CoordinadorController {
 	}
 	
 	@RequestMapping("/editarExpediente")
-	public ModelAndView editarExpediente(@RequestParam Integer alumnoid) {
+	public ModelAndView editarExpediente(@Valid @RequestParam Integer alumnoid) {
 		ModelAndView mav = new ModelAndView();
 		Alumno alumno = new Alumno();
-		List<Municipio> municipios=null;
-		List<CentroEscolar> centros=null;
-		
 		alumno=alumnoService.findOne(alumnoid);
-		municipios= municipioService.findAll();
-		centros=centroService.findAll();
-
-		mav.addObject("centros",centros);
-		mav.addObject("municipios",municipios);
+		mav.addObject("centros",centroService.findAll());
+		mav.addObject("municipios",municipioService.findAll());
 		mav.addObject("alumno",alumno);
 		mav.setViewName("editarExpediente");
+		return mav;
+	}
+	
+	@RequestMapping("/formEditarExpediente")
+	public ModelAndView formEditarExpediente(@Valid @ModelAttribute Alumno alumno, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.addObject("municipios",municipioService.findAll());
+			mav.addObject("centros",centroService.findAll());
+			mav.addObject("alumno",alumno);
+			mav.setViewName("editarExpediente");
+		}
+		else {
+			alumnoService.insert(alumno);
+			mav.setViewName("co-buscador");
+		}
 		return mav;
 	}
 	
@@ -177,13 +187,9 @@ public class CoordinadorController {
 	@RequestMapping("/NuevaMateriaCursada")
 	public ModelAndView NuevaMateriaCursada() {
 		ModelAndView mav = new ModelAndView();
-		List<Materia> materias =  null;
 		MateriaXAlumno mxa = new MateriaXAlumno();
-		
-		materias= materiaService.findAll();
-		
-		mav.addObject("materias",materias);
-		mav.addObject("mxa",mxa);
+		mav.addObject("materias",materiaService.findAll());
+		mav.addObject("materiaXAlumno",mxa);
 		mav.setViewName("nuevaMateriaCursada");
 		return mav;
 		
@@ -194,34 +200,55 @@ public class CoordinadorController {
 		ModelAndView mav = new ModelAndView();
 		List<Materia> materias =  null;
 		MateriaXAlumno mxa= new MateriaXAlumno();
-		
 		materias= materiaService.findAll();
 		mxa = mxaService.findOne(id);
-		
-
-		
-		
 		mav.addObject("materias",materias);
-		mav.addObject("mxa",mxa);
+		mav.addObject("materiaXAlumno",mxa);
 		mav.setViewName("editarMateriaCursada");
 		return mav;
 	}
 	
 	@RequestMapping("/formMateriaCursada")
-	public ModelAndView formMateriaCursada(@ModelAttribute MateriaXAlumno mxa) {
+	public ModelAndView formMateriaCursada(@Valid @ModelAttribute MateriaXAlumno mxa, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		
-		if(mxa.getNota() < 6.0) {
-			mxa.setResultado(false);
-		}else {
-			mxa.setResultado(true);
+		if(result.hasErrors()) {
+			mav.addObject("materias",materiaService.findAll());
+			mav.addObject("materiaXAlumno",mxa);
+			mav.setViewName("nuevaMateriaCursada");
 		}
-		
-		
-		mxaService.insert(mxa);
-		
-		mav.addObject("alumnoid",mxa.getAlumno().getAlumnoID());
-		mav.setViewName("materiasCursadas");
+		else{
+			if(mxa.getNota() < 6.0) {
+				mxa.setResultado(false);
+			}else {
+				mxa.setResultado(true);
+			}
+			mxaService.insert(mxa);		
+			mav.addObject("alumnoid",mxa.getAlumno().getAlumnoID());
+			mav.setViewName("materiasCursadas");
+		}
+
+		return mav;
+	}
+	
+	@RequestMapping("/formEditarMateriaCursada")
+	public ModelAndView formEditarMateriaCursada(@Valid @ModelAttribute MateriaXAlumno mxa, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.addObject("materias",materiaService.findAll());
+			mav.addObject("materiaXAlumno",mxa);
+			mav.setViewName("editarMateriaCursada");
+		}
+		else{
+			if(mxa.getNota() < 6.0) {
+				mxa.setResultado(false);
+			}else {
+				mxa.setResultado(true);
+			}
+			mxaService.insert(mxa);		
+			mav.addObject("alumnoid",mxa.getAlumno().getAlumnoID());
+			mav.setViewName("materiasCursadas");
+		}
+
 		return mav;
 	}
 	

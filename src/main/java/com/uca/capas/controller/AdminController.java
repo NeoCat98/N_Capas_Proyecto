@@ -79,59 +79,32 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView();
 		UserAdmin user = new UserAdmin();
 		Encriptar en = new Encriptar();
-		
 		user=userService.findOne(id);
-		List<Rol> roles = null;
-		List<CentroEscolar> centros = null;
-		List<Municipio> municipios = null;
-		List<Departamento> departamentos = null;
-		
-		
-		
-		
 		try {
-			departamentos = departamentoService.findAll();
-			centros = centroService.findAll();
-			municipios = municipioService.findAll();
-			roles = rolService.findAll();
 			user.setPasswordEncripted(en.decrypt(user.getPasswordEncripted()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.addObject("user",user);
-		mav.addObject("departamentos", departamentos);
-		mav.addObject("centros", centros);
-		mav.addObject("municipios", municipios);
-		mav.addObject("roles", roles);
+		mav.addObject("userAdmin",user);
+		mav.addObject("departamentos", departamentoService.findAll());
+		mav.addObject("centros", centroService.findAll());
+		mav.addObject("municipios", municipioService.findAll());
+		mav.addObject("roles", rolService.findAll());
 		mav.setViewName("editarUsuario");
 		return mav;
 	}
+	
 	
 	
 	@RequestMapping("/nuevoUsuario")
 	public ModelAndView nuevoUsuario() {
 		ModelAndView mav = new ModelAndView();
 		UserAdmin user = new UserAdmin();
-		Encriptar en = new Encriptar();
-		
-		List<Rol> roles = null;
-		List<CentroEscolar> centros = null;
-		List<Municipio> municipios = null;
-		List<Departamento> departamentos = null;
-		
-		try {
-			departamentos = departamentoService.findAll();
-			centros = centroService.findAll();
-			municipios = municipioService.findAll();
-			roles = rolService.findAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		mav.addObject("user",user);
-		mav.addObject("departamentos", departamentos);
-		mav.addObject("centros", centros);
-		mav.addObject("municipios", municipios);
-		mav.addObject("roles", roles);
+		mav.addObject("userAdmin",user);
+		mav.addObject("departamentos", departamentoService.findAll());
+		mav.addObject("centros", centroService.findAll());
+		mav.addObject("municipios", municipioService.findAll());
+		mav.addObject("roles", rolService.findAll());
 		mav.setViewName("usuario");
 		return mav;
 	}
@@ -140,21 +113,57 @@ public class AdminController {
 	public ModelAndView formEditarUsuario(@Valid @ModelAttribute UserAdmin user, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
 		Encriptar en = new Encriptar();
-		try {
-			if (user.getEstado() == null) {
-				user.setEstado(false);
-			}
-			System.out.println(user.getUserAdminID());
-			
-			user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
-			userService.save(user);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(result.hasErrors()) {
+			mav.addObject("userAdmin",user);
+			mav.addObject("departamentos", departamentoService.findAll());
+			mav.addObject("centros", centroService.findAll());
+			mav.addObject("municipios", municipioService.findAll());
+			mav.addObject("roles", rolService.findAll());
+			mav.setViewName("editarUsuario");
 		}
-		mav.setViewName("index");
+		else {
+			try {
+				if (user.getEstado() == null) {
+					user.setEstado(false);
+				}
+				System.out.println(user.getUserAdminID());
+				user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
+				userService.save(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/usuarios");
+		}
 		return mav;
 	}
 	
+	@RequestMapping("/formNuevoUsuario")
+	public ModelAndView formNuevoUsuario(@Valid @ModelAttribute UserAdmin user, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		Encriptar en = new Encriptar();
+		if(result.hasErrors()) {
+			mav.addObject("userAdmin",user);
+			mav.addObject("departamentos", departamentoService.findAll());
+			mav.addObject("centros", centroService.findAll());
+			mav.addObject("municipios", municipioService.findAll());
+			mav.addObject("roles", rolService.findAll());
+			mav.setViewName("usuario");
+		}
+		else {
+			try {
+				if (user.getEstado() == null) {
+					user.setEstado(false);
+				}
+				System.out.println(user.getUserAdminID());
+				user.setPasswordEncripted(en.encrypt(user.getPasswordEncripted()));
+				userService.save(user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			mav.setViewName("redirect:/usuarios");
+		}
+		return mav;
+	}
 	
 	@RequestMapping("/materias")
 	public ModelAndView materias() {
@@ -171,7 +180,6 @@ public class AdminController {
 		for(Materia mate : materias) {
 			lista.add(new String[] {mate.getMateriaID().toString(), mate.getMateriaID().toString(),mate.getMateriaName().toString()});
 		}
-		
 		TablaDTO dto = new TablaDTO();
         dto.setData(lista);
 
@@ -200,12 +208,30 @@ public class AdminController {
 	@RequestMapping("/formMateria")
 	public ModelAndView formEditarMateria(@Valid @ModelAttribute Materia materia, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		materiaService.save(materia);
-		mav.setViewName("materias");
+		if(result.hasErrors()) {
+			mav.addObject("materia",materia);
+			mav.setViewName("editarMateria");
+		}
+		else {
+			materiaService.save(materia);
+			mav.setViewName("materias");
+		}
 		return mav;
 	}
 	
-	
+	@RequestMapping("/formNuevaMateria")
+	public ModelAndView formNuevaMateria(@Valid @ModelAttribute Materia materia, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.addObject("materia",materia);
+			mav.setViewName("materia");
+		}
+		else {
+			materiaService.save(materia);
+			mav.setViewName("materias");
+		}
+		return mav;
+	}
 
 	
 	@RequestMapping("/centros")
@@ -234,17 +260,10 @@ public class AdminController {
 	public ModelAndView editarCentro(@RequestParam Integer id) {
 		ModelAndView mav = new ModelAndView();
 		CentroEscolar centroE= new CentroEscolar();
-		List<Municipio> municipios = null;
-		List<Departamento> departamentos = null;
-		
 		centroE=centroService.findOne(id);
-	
-		municipios=municipioService.findAll();
-		departamentos = departamentoService.findAll();
-		
-		mav.addObject("municipios",municipios);
-		mav.addObject("departamentos",departamentos);
-		mav.addObject("centro",centroE);
+		mav.addObject("municipios",municipioService.findAll());
+		mav.addObject("departamentos",departamentoService.findAll());
+		mav.addObject("centroEscolar",centroE);
 		mav.setViewName("editarCentro");
 		return mav;
 	}
@@ -260,7 +279,7 @@ public class AdminController {
 		
 		mav.addObject("municipios",municipios);
 		mav.addObject("departamentos",departamentos);
-		mav.addObject("centro",centroE);
+		mav.addObject("centroEscolar",centroE);
 		mav.setViewName("centro");
 		return mav;
 	}
@@ -268,10 +287,32 @@ public class AdminController {
 	@RequestMapping("/formCentro")
 	public ModelAndView formEditarCentro(@Valid @ModelAttribute CentroEscolar centro, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		centroService.save(centro);
-		mav.setViewName("centros");
+		if(result.hasErrors()) {
+			mav.addObject("municipios",municipioService.findAll());
+			mav.addObject("departamentos",departamentoService.findAll());
+			mav.addObject("centroEscolar",centro);
+			mav.setViewName("editarCentro");
+		}
+		else {
+			centroService.save(centro);
+			mav.setViewName("centros");
+		}
 		return mav;
 	}
 	
-	
+	@RequestMapping("/formNuevoCentro")
+	public ModelAndView formNuevoCentro(@Valid @ModelAttribute CentroEscolar centro, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		if(result.hasErrors()) {
+			mav.addObject("municipios",municipioService.findAll());
+			mav.addObject("departamentos",departamentoService.findAll());
+			mav.addObject("centroEscolar",centro);
+			mav.setViewName("centro");
+		}
+		else {
+			centroService.save(centro);
+			mav.setViewName("centros");
+		}
+		return mav;
+	}
 }

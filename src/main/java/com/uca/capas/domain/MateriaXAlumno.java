@@ -13,6 +13,8 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(schema="public",name="MateriaXAlumno")
@@ -45,19 +47,20 @@ public class MateriaXAlumno {
 	
 	 
 	 @Column(name="Anno")
-	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 @NotNull(message="Este campo no puede estar vacio")
 	 private Integer anno;
 	 
 	 @Column(name="Ciclo")
-	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 @NotNull(message="Este campo no puede estar vacio")
 	 private Integer ciclo;
 	 
 	 @Column(name="Nota")
-	// @NotEmpty(message="Este campo no puede estar vacio")
+	 @PositiveOrZero(message="Este campo debe ser 0 o mayor")
+	 @NotNull(message="Este campo no puede estar vacio")
 	 private float nota;
 	 
 	 @Column(name="Resultado")
-	 //@NotEmpty(message="Este campo no puede estar vacio")
+	 @NotNull(message="Este campo no puede estar vacio")
 	 private Boolean resultado;
 	 
 	 public MateriaXAlumno(){

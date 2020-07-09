@@ -11,7 +11,8 @@
     />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="../js/ejemplo.js"></script> 
+	
+ <script src="../js/ejemplo.js"></script> 
 	<!--CUSTOM CSS-->
 	<link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="../styles/usuarios/usuario.css">
@@ -19,13 +20,13 @@
   <body>
     <div class="container p-5">
 		<h2>Editar Usuario.</h2>
-		<form th:action="@{/formUsuario}" method="post" th:object="${user}">
+		<form th:action="@{/formUsuario}" method="post" th:object="${userAdmin}">
         <div class="form row">
           <input
             type="hidden"
             class="form-control"
             id="inputNombre"
-            th:field="${user.userAdminID}"
+            th:field="${userAdmin.userAdminID}"
           />
 
           <div class="form-group col-md-6">
@@ -34,8 +35,9 @@
               type="text"
               class="form-control"
               id="inputNombre"
-              th:field="${user.nombre}"
+              th:field="*{nombre}"
             />
+            <span th:errors="*{nombre}" style="color: #FF0000"></span>
           </div>
 
           <div class="form-group col-md-6">
@@ -44,8 +46,9 @@
               type="text"
               class="form-control"
               id="inputApellido"
-              th:field="${user.apellido}"
+              th:field="*{apellido}"
             />
+            <span th:errors="*{apellido}" style="color: #FF0000"></span>
           </div>
 
           <div class="form-group col-md-6">
@@ -54,8 +57,9 @@
               type="number"
               class="form-control"
               id="inputEdad"
-              th:field="${user.edad}"
+              th:field="*{edad}"
             />
+            <span th:errors="*{edad}" style="color: #FF0000"></span>
           </div>
 
           <div class="form-group col-md-6">
@@ -65,8 +69,9 @@
               class="form-control"
               id="inputFechas"
               placeholder="DD/MM/AAAA"
-              th:field="${user.birthdayDate}"
+              th:field="*{birthdayDate}"
             />
+            <span th:errors="*{birthdayDate}" style="color: #FF0000"></span>
           </div>
         </div>
         <div class="form-group">
@@ -75,8 +80,9 @@
             type="text"
             class="form-control"
             id="inputUsername"
-            th:field="${user.username}"
+            th:field="*{username}"
           />
+          <span th:errors="*{username}" style="color: #FF0000"></span>
         </div>
 
         <div class="form-group">
@@ -85,9 +91,10 @@
             type="text"
             class="form-control"
             id="inputPassword"
-            th:value="${user.passwordEncripted}"
+            th:value="*{passwordEncripted}"
             name="passwordEncripted"
           />
+          <span th:errors="*{passwordEncripted}" style="color: #FF0000"></span>
         </div>
 
         <div class="form-group">
@@ -96,8 +103,9 @@
             type="text"
             class="form-control"
             id="inputDir"
-            th:field="${user.direccion}"
+            th:field="*{direccion}"
           />
+          <span th:errors="*{direccion}" style="color: #FF0000"></span>
         </div>
 
         <div class="form-group">
@@ -135,11 +143,13 @@
           <select
             id="inputMuni"
             class="form-control"
-            th:field="*{municipio.municipioID}">
+            th:field="*{municipio.municipioID}"
+          >
             <option
               th:each="muni : ${municipios}"
               th:value="${muni.municipioID}"
-              th:text="${muni.municipioName}"/>
+              th:text="${muni.municipioName}"
+            />
           </select>
         </div>
 
@@ -159,7 +169,7 @@
             type="checkbox"
             class="custom-control-input"
             id="customControlValidation1"
-            th:field="${user.Estado}"
+            th:field="*{Estado}"
           />
           <label class="custom-control-label" for="customControlValidation1"
             >Activo</label

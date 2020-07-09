@@ -9,7 +9,8 @@
 	type="text/css">
 <meta charset="ISO-8859-1">
 <title>Editar Expediente</title>
-<script src="../js/ejemplo.js"></script> 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="../js/ejemplo.js"></script> 
 <link rel="stylesheet" href="../styles/usuarios/usuarios.css">
 </head>
 <body>
@@ -17,7 +18,7 @@
 	<div class="container">
 		<br>
 		<h1 class="mt-2">Editar Expediente.</h1>
-		<form th:action="@{/formExpediente}" method="post"
+		<form th:action="@{/formEditarExpediente}" method="post"
 			th:object="${alumno}">
 
 			<input type="hidden" th:field="${alumno.alumnoID}">
@@ -25,54 +26,65 @@
 			<div class="form-group">
 				<label for="inputNombre">Nombres: </label> <input type="text"
 					class="form-control" id="inputNombre"
-					th:field="${alumno.firstName}">
+					th:field="*{firstName}">
+					<span th:errors="*{firstName}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputApellido">Apellidos: </label> <input type="text"
 					class="form-control" id="inputApellido"
-					th:field="${alumno.lastName}">
+					th:field="*{lastName}">
+					<span th:errors="*{lastName}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputCarnet">Carnet: </label> <input type="text"
-					class="form-control" id="inputCarnet" th:field="${alumno.carnet}">
+					class="form-control" id="inputCarnet" th:field="*{carnet}">
+					<span th:errors="*{carnet}" style="color: #FF0000"></span>
 			</div>
 			<div class="form-group">
 				<label for="inputFecha">Fecha de nacimiento: </label> <input
 					type="date" class="form-control" id="inputFecha"
-					th:field="${alumno.birthdayDate}">
+					th:field="*{birthdayDate}">
+					<span th:errors="*{birthdayDate}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputFecha">Edad: </label> <input type="number"
-					class="form-control" id="inputFecha" th:field="${alumno.edad}">
+					class="form-control" id="inputFecha" th:field="*{edad}">
+					<span th:errors="*{edad}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputDir">Direccion: </label> <input type="text"
-					class="form-control" id="inputDir" th:field="${alumno.direccion}">
+					class="form-control" id="inputDir" th:field="*{direccion}">
+					<span th:errors="*{direccion}" style="color: #FF0000"></span>
+					
 			</div>
 
 			<div class="form-group">
 				<label for="inputF">Telefono Fijo: </label> <input type="text"
-					class="form-control" id="inputF" th:field="${alumno.telefonoFijo}">
+					class="form-control" id="inputF" th:field="*{telefonoFijo}">
+					<span th:errors="*{telefonoFijo}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputTM">Telefono Movil: </label> <input type="text"
 					class="form-control" id="inputTM"
-					th:field="${alumno.telefonoMovil}">
+					th:field="*{telefonoMovil}">
+					<span th:errors="*{telefonoMovil}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputNP">Nombre padre: </label> <input type="text"
-					class="form-control" id="inputNP" th:field="${alumno.padre}">
+					class="form-control" id="inputNP" th:field="*{padre}">
+					<span th:errors="*{padre}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputNM">Nombre madre: </label> <input type="text"
-					class="form-control" id="inputNM" th:field="${alumno.madre}">
+					class="form-control" id="inputNM" th:field="*{madre}">
+					<span th:errors="*{madre}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
