@@ -52,13 +52,15 @@ public class UserController {
 	@Autowired
 	RolService rolService;
 
-	@RequestMapping("/SingOut")
-	public ModelAndView singOut(HttpSession request,@RequestParam UserAdmin user) {
+	@RequestMapping("/SignOut")
+	public ModelAndView singOut(HttpSession request) {
 		ModelAndView mav =  new ModelAndView();
-		user.setEstado(false);
+		/*
+		UserAdmin user = new UserAdmin();
+		user = (UserAdmin) request.getAttribute("usuario");
+		*/
 		request.invalidate();
-		userService.insert(user);
-		mav.setViewName("inicioSesion");
+		mav.setViewName("redirect:/IniciarSesion");
 		return mav;
 	}
 	
@@ -90,15 +92,19 @@ public class UserController {
 					}
 				} catch (Exception e) {
 			    	mav.addObject("error", "Ha ocurrido un error al intentar verificar la contraseña!!");
-			    	mav.setViewName("redirect:/index");
+			    	mav.setViewName("redirect:/IniciarSesion");
+					request.invalidate();
 					e.printStackTrace();
 				}
 		    } else {
 		    	mav.addObject("error", "Username or Password is wrong!!");
-		        mav.setViewName("redirect:/InicioSesion");
+		        mav.setViewName("redirect:/IniciarSesion");
+				request.invalidate();
 		    }
 	    }else {
-	    	mav.setViewName("redirect:/InicioSesion");
+	    	mav.addObject("error", "Username or Password is wrong!!");
+	    	mav.setViewName("redirect:/IniciarSesion");
+			request.invalidate();
 	    }
 	    return mav;
 	}
@@ -108,13 +114,20 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		UserAdmin user = new UserAdmin();
 		user = (UserAdmin) request.getAttribute("usuario");
-		if(user.getRol().getRolID().equals(1)) {
+		if(user.getRol().getRolName().equals("Administrador")) {
 			mav.setViewName("dashboard");
-		}else {
+			return mav;
+		}
+		if(user.getRol().getRolName().equals("Coordinador")) {
 			mav.addObject("UserAdmin",user);
 			mav.setViewName("co-opciones");
+			return mav;
+		}else {
+			mav.addObject("error","Error al intentar entrar, intente mas tarde");
+			request.invalidate();
+			mav.setViewName("redirect:/IniciarSesion");
+			return mav;
 		}
-		return mav;
 	}
 
 	@RequestMapping("/registrar")
