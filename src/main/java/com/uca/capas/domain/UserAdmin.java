@@ -1,8 +1,5 @@
 package com.uca.capas.domain;
 
-
-
-
 import com.uca.capas.config.Encriptar;
 
 import javax.persistence.Column;
@@ -202,6 +199,8 @@ public class UserAdmin {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
+	
 
 	public UserAdmin() {
 		super();
