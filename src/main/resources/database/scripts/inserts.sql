@@ -299,8 +299,8 @@ insert into public.centroescolar (centroescolarname, direccion, municipioid, est
 insert into public.centroescolar (centroescolarname, direccion, municipioid, estado) values ('Colegio Champagnat', '7 Avenida Norte, Santa Tecla', 193, true);
 insert into public.centroescolar (centroescolarname, direccion, municipioid, estado) values ('Centro Escolar España', ' Avenida Don Bosco, San Salvador', 193, true);
 insert into public.useradmin(centroescolarid,municipioid,rolid,nombre,apellido,birthdaydate,edad,direccion,username,passwordencripted,estado)
-values (1,193,1,'Mario Cecilio','De Leon Recinos','1996/12/15',23,'Cima4','admin1','admin',true),
-(1,193,2,'Mario Cecilio','De Leon Recinos','1996/12/15',23,'Cima4','admin2','admin',true);
+values (1,193,1,'Mario Cecilio','De Leon Recinos','1996/12/15',23,'Cima4','admin1','X4txTH1VnoyDaX1FBmue9g==',true),
+(1,193,2,'Mario Cecilio','De Leon Recinos','1996/12/15',23,'Cima4','admin2','X4txTH1VnoyDaX1FBmue9g==',true);
 insert into public.alumno (centroescolarid, firstname, lastname, carnet, birthdaydate, edad, Direccion, telefonofijo, telefonomovil, nombredelpadre, nombredelamadre, municipioid) values (17, 'Daysi', 'Perez', '55281837', '1997-11-13', 23, '6 Commercial Street', '04559055', '19375714', 'Barnebas', 'Jaclin', 193);
 insert into public.alumno (centroescolarid, firstname, lastname, carnet, birthdaydate, edad, Direccion, telefonofijo, telefonomovil, nombredelpadre, nombredelamadre, municipioid) values (2, 'Alejandra', 'Rodriguez', '29480905', '1994-11-07', 26, '956 Monument Street', '41504730', '11422623', 'Maddie', 'Drona', 193);
 insert into public.alumno (centroescolarid, firstname, lastname, carnet, birthdaydate, edad, Direccion, telefonofijo, telefonomovil, nombredelpadre, nombredelamadre, municipioid) values (10, 'Daysi', 'Ramos', '90611762', '1986-05-17', 34, '8393 Sheridan Place', '56016445', '49200697', 'Allayne', 'Dehlia', 193);
