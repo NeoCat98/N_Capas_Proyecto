@@ -83,23 +83,29 @@ public class UserController {
 			if (null != userBD) {
 				try {
 					if (en.decrypt(userBD.getPasswordEncripted()).equals(pass)) {
-					    request.setAttribute("usuario", userBD);
-					    mav.setViewName("redirect:/index");
+						if(userBD.getEstado()) {
+						    request.setAttribute("usuario", userBD);
+						    mav.setViewName("redirect:/index");
+						}
+						else {
+							mav.addObject("error","Su cuenta esta inactiva");
+							mav.setViewName("inicioSesion");
+						}
 					}
 				} catch (Exception e) {
 			    	mav.addObject("error", "Ha ocurrido un error al intentar verificar la contraseña!!");
-			    	mav.setViewName("redirect:/IniciarSesion");
+			    	mav.setViewName("inicioSesion");
 					request.invalidate();
 					e.printStackTrace();
 				}
 		    } else {
 		    	mav.addObject("error", "Username or Password is wrong!!");
-		        mav.setViewName("redirect:/IniciarSesion");
+		        mav.setViewName("inicioSesion");
 				request.invalidate();
 		    }
 	    }else {
 	    	mav.addObject("error", "Username or Password is wrong!!");
-	    	mav.setViewName("redirect:/IniciarSesion");
+	    	mav.setViewName("inicioSesion");
 			request.invalidate();
 	    }
 	    return mav;
