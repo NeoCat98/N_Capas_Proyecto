@@ -12,10 +12,11 @@
 	<div class="container">
 		<div class="mt-5">
 			<h1>Buscador de Alumnos.</h1>
+			<a href="/SignOut" class="btn btn-primary">Cerrar Sesion</a>
 		</div>
+		
 		<form th:action="@{/expedientes}" method="post">
 		<div class="form-group">
-	
 			<label >Buscar Alumno por: </label>		
 			<select name="tipoBusqueda" class="form-control">
 			     <option value="0">Nombre</option>

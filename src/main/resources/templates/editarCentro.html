@@ -8,7 +8,8 @@
 
 <meta charset="ISO-8859-1">
 <title>Editar Centro Escolar</title>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="../js/ejemplo.js"></script> 
 <!--Custom css-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;700;800;900&display=swap"
@@ -18,18 +19,20 @@
 <body>
 	<div class="container p-5">
 		<h2>Editar Centro Escolar.</h2>
-		<form th:action="@{/formCentro}" method="post" th:object="${centro}">
+		<form th:action="@{/formCentro}" method="post" th:object="${centroEscolar}">
 			<input type="hidden" class="form-control" id="inputNombre"
-				th:field="${centro.centroEscolarID}">
+				th:field="${centroEscolar.centroEscolarID}">
 			<div class="form-group">
 				<label for="inputNombre">Nombre</label> <input type="text"
 					class="form-control" id="inputNombre"
-					th:field="${centro.CentroEscolarName}">
+					th:field="*{CentroEscolarName}">
+				<span th:errors="*{centroEscolarID}" style="color: #FF0000"></span>
 			</div>
 
 			<div class="form-group">
 				<label for="inputDir">Direccion</label> <input type="text"
-					class="form-control" id="inputDir" th:field="${centro.direccion}">
+					class="form-control" id="inputDir" th:field="*{direccion}">
+				<span th:errors="*{direccion}" style="color: #FF0000"></span>
 			</div>
 
 

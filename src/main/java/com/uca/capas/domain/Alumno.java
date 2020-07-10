@@ -15,6 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(schema="public",name="Alumno")
@@ -55,9 +58,12 @@ public class Alumno {
 	private String carnet;
 	
 	@Column(name="BirthdayDate")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message="Este campo no puede estar vacio")
 	private Date birthdayDate;
 	
-	@Column(name="Edad")	
+	@Column(name="Edad")
+	@NotNull(message="Este campo no puede estar vacio")	
 	private Integer edad;
 	
 	@Column(name="Direccion")
@@ -71,9 +77,7 @@ public class Alumno {
 	@Column(name="TelefonoMovil")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String telefonoMovil;
-	
 
-	
 	@Column(name="NombreDelPadre")
 	@NotEmpty(message="Este campo no puede estar vacio")
 	private String padre;

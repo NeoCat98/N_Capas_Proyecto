@@ -4,7 +4,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"><link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 <title>Nuevo Expediente</title>
-
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="../js/ejemplo.js"></script> 
 <link rel="stylesheet" href="../styles/usuarios/usuarios.css">
 
 </head>
@@ -18,50 +20,60 @@
 		<div class="form-group">
 		 	<label for="inputNombre">Nombres: </label>
 		 	<input type="text" class="form-control" id="inputNombre" th:field="${alumno.firstName}">
+		 	<span th:errors="*{firstName}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputApellido">Apellidos: </label>
-		 	<input type="text" class="form-control" id="inputApellido" th:field="${alumno.lastName}">
+		 	<input type="text" class="form-control" id="inputApellido" th:field="*{lastName}">
+		 	<span th:errors="*{lastName}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputCarnet">Carnet: </label>
-		 	<input type="text" class="form-control" id="inputCarnet" th:field="${alumno.carnet}">
+		 	<input type="text" class="form-control" id="inputCarnet" th:field="*{carnet}">
+		 	<span th:errors="*{carnet}" style="color: #FF0000"></span>
 		</div>
 		<div class="form-group">
 		 	<label for="inputFecha">Fecha de nacimiento: </label>
-		 	<input type="date" class="form-control" id="inputFecha" th:field="${alumno.birthdayDate}">
+		 	<input type="date" class="form-control" id="inputFecha" th:field="*{birthdayDate}">
+		 	<span th:errors="*{birthdayDate}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputFecha">Edad: </label>
-		 	<input type="number" class="form-control" id="inputFecha" th:field="${alumno.edad}">
+		 	<input type="number" class="form-control" id="inputFecha" th:field="*{edad}">
+		 	<span th:errors="*{edad}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputDir">Direccion: </label>
-		 	<input type="text" class="form-control" id="inputDir" th:field="${alumno.direccion}">
+		 	<input type="text" class="form-control" id="inputDir" th:field="*{direccion}">
+		 	<span th:errors="*{direccion}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputF">Telefono Fijo: </label>
-		 	<input type="text" class="form-control" id="inputF" th:field="${alumno.telefonoFijo}">
+		 	<input type="text" class="form-control" id="inputF" th:field="*{telefonoFijo}">
+		 	<span th:errors="*{telefonoFijo}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputTM">Telefono Movil: </label>
-		 	<input type="text" class="form-control" id="inputTM" th:field="${alumno.telefonoMovil}">
+		 	<input type="text" class="form-control" id="inputTM" th:field="*{telefonoMovil}">
+		 	<span th:errors="*{telefonoMovil}" style="color: #FF0000"></span>
 		</div>
 	
 		<div class="form-group">
 		 	<label for="inputNP">Nombre padre: </label>
-		 	<input type="text" class="form-control" id="inputNP" th:field="${alumno.padre}">
+		 	<input type="text" class="form-control" id="inputNP" th:field="*{padre}">
+		 	<span th:errors="*{padre}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
 		 	<label for="inputNM">Nombre madre: </label>
-		 	<input type="text" class="form-control" id="inputNM" th:field="${alumno.madre}">
+		 	<input type="text" class="form-control" id="inputNM" th:field="*{madre}">
+		 	<span th:errors="*{madre}" style="color: #FF0000"></span>
 		</div>
 		
 		<div class="form-group">
@@ -84,6 +96,7 @@
 		
 		<div class="d-flex mb-4">
 			<input type="Submit" value="Crear Expediente" class="btn btn-primary">
+			<input type="reset" class="btn btn-info boton-regresar"/>
 			<a href="/coordinadorIndex" class="btn btn-warning boton-regresar">Regresar</a>
 		</div>
 		
