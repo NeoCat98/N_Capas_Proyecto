@@ -52,6 +52,13 @@ public class AdminController {
 	@Autowired
 	RolService rolService;
 	
+	@RequestMapping("/adminIndex")
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("dashboard");
+		return mav;
+	}
+	
 	@RequestMapping("/usuarios")
 	public ModelAndView usuario() {
 		ModelAndView mav = new ModelAndView();

@@ -111,7 +111,7 @@ public class UserController {
 		UserAdmin user = new UserAdmin();
 		user = (UserAdmin) request.getAttribute("usuario");
 		if(user.getRol().getRolName().equals("Administrador")) {
-			mav.setViewName("dashboard");
+			mav.setViewName("redirect:/adminIndex");
 			return mav;
 		}
 		if(user.getRol().getRolName().equals("Coordinador")) {
